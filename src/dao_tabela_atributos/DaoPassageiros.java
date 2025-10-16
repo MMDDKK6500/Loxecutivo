@@ -1,7 +1,4 @@
-/* 
- * CLASSE DE ACESSO AOS OBJETOS 
- * PROF. OZIAS G. SANTOS 
- */
+
 package dao_tabela_atributos;
 import java.sql.Connection;
 import mysql.Conexao;
@@ -9,10 +6,8 @@ import tabela_atributos.Passageiro;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-/** 
- * 
- * @author Ozias 
- */
+
+
 public class DaoPassageiros {
     private Conexao conexao;
     private Connection conectar;

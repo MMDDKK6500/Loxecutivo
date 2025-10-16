@@ -2,10 +2,8 @@ package mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-/** 
- * 
- * @author Ozias G. Santos 
- */
+
+
 public class Conexao {
 
   public Connection getConexao() {
