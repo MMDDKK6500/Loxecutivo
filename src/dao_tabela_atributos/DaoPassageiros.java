@@ -42,7 +42,7 @@ public class DaoPassageiros {
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);
             stmt.setInt(1, id);
-            ResultSet rs_TabelaPassageiros = stmt.executeQuery(); //Retorna a tabela SQL e armazena em rs_TabelaCursos
+            ResultSet rs_TabelaPassageiros = stmt.executeQuery();
             Passageiro passageiros = new Passageiro();
             rs_TabelaPassageiros.first();
             passageiros.setId(id);

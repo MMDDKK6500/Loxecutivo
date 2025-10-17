@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import mysql.Conexao;
-import tabela_atributos.Passageiro;
 import tabela_atributos.Viagem;
 
-
-//TODO: get
 public class DaoViagens {
     private Conexao conexao;
     private Connection conectar;
@@ -26,7 +23,9 @@ public class DaoViagens {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);
             stmt.setInt(1, viagem.getLocalDeOrigem());
             stmt.setInt(2, viagem.getLocalDeDestino());
-            //TODO: Resto dos sets
+            stmt.setInt(3, viagem.getId_Motorista());
+            stmt.setInt(4, viagem.getId_Veiculo());
+            stmt.setInt(5, viagem.getId_Evento());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -34,23 +33,21 @@ public class DaoViagens {
         }
     }
     
-    public Passageiro getPassageiro(int id) {
-        String sql = "SELECT * FROM passageiros WHERE id = ?";
+    public Viagem getViagem(int id) {
+        String sql = "SELECT * FROM viagens WHERE id = ?";
 
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);
             stmt.setInt(1, id);
-            ResultSet rs_TabelaPassageiros = stmt.executeQuery(); //Retorna a tabela SQL e armazena em rs_TabelaCursos
-            Passageiro viagem = new Passageiro();
-            rs_TabelaPassageiros.first();
+            ResultSet rs_TabelaViagens = stmt.executeQuery();
+            Viagem viagem = new Viagem();
+            rs_TabelaViagens.first();
             viagem.setId(id);
-            viagem.setNome(rs_TabelaPassageiros.getString("nome"));
-            viagem.setSobrenome(rs_TabelaPassageiros.getString("sobrenome"));
-            viagem.setNumero(rs_TabelaPassageiros.getString("numero"));
-            viagem.setEmpresa(rs_TabelaPassageiros.getString("empresa"));
-            viagem.setRG(rs_TabelaPassageiros.getString("rg"));
-            viagem.setCPF(rs_TabelaPassageiros.getString("cpf"));
-            viagem.setId_Viagem(rs_TabelaPassageiros.getInt("id_viagem"));
+            viagem.setLocalDeOrigem(rs_TabelaViagens.getInt("local_de_origem"));
+            viagem.setLocalDeDestino(rs_TabelaViagens.getInt("local_de_destino"));
+            viagem.setId_Motorista(rs_TabelaViagens.getInt("id_motorista"));
+            viagem.setId_Veiculo(rs_TabelaViagens.getInt("id_veiculo"));
+            viagem.setId_Evento(rs_TabelaViagens.getInt("id_evento"));
             return viagem;
 
         } catch (SQLException e) {
