@@ -1,17 +1,17 @@
 package tabela_atributos;
 
 public class Veiculo {
-    private int id_placa;
+    private String id_placa;
     private String modelo;
     private int ano;
     private String marca;
     private String cor;
 
-    public int getId_Placa() {
+    public String getId_Placa() {
         return id_placa;
     }
 
-    public void setId_Placa(int id_placa) {
+    public void setId_Placa(String id_placa) {
         this.id_placa = id_placa;
     }
 
