@@ -7,14 +7,12 @@ import java.sql.SQLException;
 import mysql.Conexao;
 import tabela_atributos.Viagem;
 
-public class DaoViagens {
+public class DaoViagens extends DaoBase {
     private Conexao conexao;
     private Connection conectar;
-    
-    //CRIAÇÃO DO CONSTRUTOR 
+
     public DaoViagens() {
-        this.conexao = new Conexao();
-        this.conectar = this.conexao.getConexao();
+        this.tabela = "viagens";
     }
     
     public void InserirDados(Viagem viagem) {

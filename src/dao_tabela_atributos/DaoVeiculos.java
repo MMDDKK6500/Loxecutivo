@@ -6,13 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-public class DaoVeiculos {
+public class DaoVeiculos extends DaoBase {
     private Conexao conexao;
     private Connection conectar;
-    
+
     public DaoVeiculos() {
-        this.conexao = new Conexao();
-        this.conectar = this.conexao.getConexao();
+        this.tabela = "veiculos";
     }
     
     public void InserirDados(Veiculo veiculo) throws SQLException {
@@ -49,18 +48,6 @@ public class DaoVeiculos {
         } catch (SQLException e) {
             System.out.println("Id não encontrado" + e.getMessage());
             throw e;
-        }
-    }
-    
-    public ResultSet getVeiculos() {
-        String sql = "SELECT * FROM veiculos";
-        try {
-            PreparedStatement stmt = this.conectar.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-            return rs;
-        } catch (SQLException e) {
-            System.out.println("Id não encontrado" + e.getMessage());
-            return null;
         }
     }
 }

@@ -4,8 +4,6 @@ import dao_tabela_atributos.DaoVeiculos;
 import java.awt.event.WindowEvent;
 import tabela_atributos.Veiculo;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Timer;
 
 public class JFrameTeste extends javax.swing.JFrame {
@@ -153,7 +151,14 @@ public class JFrameTeste extends javax.swing.JFrame {
             dv.InserirDados(veiculo);
             mensagem.setText("Veículo inserido no banco de dados!");
             erro.setText("");
-            new Timer(5_000, (e) -> { this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)); }).start();
+            new Timer(5_000, (e) -> {
+                JFrameTabela tabela = new JFrameTabela();
+                tabela.setVisible(true);
+                dispose();
+            }){{
+            setRepeats(false); // Run only once
+            start();
+            }};
         } catch(SQLException e) {
             mensagem.setText("Falha ao inserir dados no banco! Consultar desenvolvedor com esta mensagem de erro:");
             erro.setText(e.getMessage());
@@ -161,40 +166,6 @@ public class JFrameTeste extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameTeste().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ano;

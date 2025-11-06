@@ -8,14 +8,12 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 
-public class DaoPassageiros {
+public class DaoPassageiros extends DaoBase {
     private Conexao conexao;
     private Connection conectar;
-    
-    //CRIAÇÃO DO CONSTRUTOR 
+
     public DaoPassageiros() {
-        this.conexao = new Conexao();
-        this.conectar = this.conexao.getConexao();
+        this.tabela = "passageiros";
     }
     
     public void InserirDados(Passageiro passageiro) {

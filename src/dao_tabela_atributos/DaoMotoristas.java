@@ -6,13 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-public class DaoMotoristas {
+public class DaoMotoristas extends DaoBase {
     private Conexao conexao;
     private Connection conectar;
-    
+
     public DaoMotoristas() {
-        this.conexao = new Conexao();
-        this.conectar = this.conexao.getConexao();
+        this.tabela = "motoristas";
     }
     
     public void InserirDados(Motorista motorista) {

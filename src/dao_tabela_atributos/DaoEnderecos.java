@@ -6,13 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-public class DaoEnderecos {
+public class DaoEnderecos extends DaoBase {
     private Conexao conexao;
     private Connection conectar;
-    
+
     public DaoEnderecos() {
-        this.conexao = new Conexao();
-        this.conectar = this.conexao.getConexao();
+        this.tabela = "enderecos";
     }
     
     public void InserirDados(Endereco endereco) {

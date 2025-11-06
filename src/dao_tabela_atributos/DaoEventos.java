@@ -6,13 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-public class DaoEventos {
+public class DaoEventos extends DaoBase {
     private Conexao conexao;
     private Connection conectar;
-    
+
     public DaoEventos() {
-        this.conexao = new Conexao();
-        this.conectar = this.conexao.getConexao();
+        this.tabela = "eventos";
     }
     
     public void InserirDados(Evento evento) {
