@@ -29,6 +29,8 @@ public class JFrameTabela extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         remover = new javax.swing.JButton();
         SelecaoTabela = new javax.swing.JComboBox<>();
+        alterar = new javax.swing.JButton();
+        inserir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,7 +48,7 @@ public class JFrameTabela extends javax.swing.JFrame {
         jTable1.setToolTipText("");
         jScrollPane1.setViewportView(jTable1);
 
-        remover.setText("Remover Dados");
+        remover.setText("Remover Dados Selecionados");
         remover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removerActionPerformed(evt);
@@ -57,6 +59,20 @@ public class JFrameTabela extends javax.swing.JFrame {
         SelecaoTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelecaoTabelaActionPerformed(evt);
+            }
+        });
+
+        alterar.setText("Alterar Dados Selecionados");
+        alterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterarActionPerformed(evt);
+            }
+        });
+
+        inserir.setText("Inserir Dados na Tabela Selecionada");
+        inserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inserirActionPerformed(evt);
             }
         });
 
@@ -74,6 +90,10 @@ public class JFrameTabela extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(remover)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(inserir)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -82,10 +102,13 @@ public class JFrameTabela extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(SelecaoTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(remover)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(remover)
+                    .addComponent(alterar)
+                    .addComponent(inserir))
                 .addGap(15, 15, 15))
         );
 
@@ -141,12 +164,30 @@ public class JFrameTabela extends javax.swing.JFrame {
     }//GEN-LAST:event_SelecaoTabelaActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
+        String[] placas = new String[jTable1.getSelectedRowCount()];
+        int indexPlacas = 0;
+        
+        // O(n²) - duas for nested
         for (int y : jTable1.getSelectedRows()) {
-            for (int x = 0; x < jTable1.getRowCount(); x++) {
-                System.out.println("x: "+ x + "y: "+ y + " " + jTable1.getModel().getValueAt(y, x));
+            for (int x = 0; x < jTable1.getColumnCount() - 1; x++) {
+                if (x == 0) {
+                    placas[indexPlacas] = (String)jTable1.getModel().getValueAt(y, x);
+                    indexPlacas++;
+                }
             }
         }
+        System.out.println(Arrays.toString(placas));
+        // TODO Fazer página de confirmação de deleção e função de deleção
     }//GEN-LAST:event_removerActionPerformed
+
+    private void alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarActionPerformed
+        // TODO Adicionar código de alteração
+        // Pegar as linhas selecionadas, pegar os dados DA TABELA DA GUI de cada uma e atualizar elas no banco de dados
+    }//GEN-LAST:event_alterarActionPerformed
+
+    private void inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirActionPerformed
+        // TODO Criar tela de Inserção de dados, criar uma para cada tabela.
+    }//GEN-LAST:event_inserirActionPerformed
 
         /**
      * @param args the command line arguments
@@ -185,6 +226,8 @@ public class JFrameTabela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> SelecaoTabela;
+    private javax.swing.JButton alterar;
+    private javax.swing.JButton inserir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton remover;
