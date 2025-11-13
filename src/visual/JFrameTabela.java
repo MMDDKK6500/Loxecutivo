@@ -30,7 +30,8 @@ public class JFrameTabela extends javax.swing.JFrame {
         SelecaoTabela = new javax.swing.JComboBox<>();
         alterar = new javax.swing.JButton();
         inserir = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        consulta = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,14 +79,21 @@ public class JFrameTabela extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setPreferredSize(new java.awt.Dimension(95, 22));
+        consulta.setPreferredSize(new java.awt.Dimension(95, 22));
+        consulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Consultar:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(674, Short.MAX_VALUE)
+                .addContainerGap(825, Short.MAX_VALUE)
                 .addComponent(SelecaoTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
             .addGroup(layout.createSequentialGroup()
@@ -98,23 +106,26 @@ public class JFrameTabela extends javax.swing.JFrame {
                         .addComponent(alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(inserir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(consulta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(SelecaoTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(remover)
                     .addComponent(alterar)
                     .addComponent(inserir)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(consulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(15, 15, 15))
         );
 
@@ -216,7 +227,6 @@ public class JFrameTabela extends javax.swing.JFrame {
             }
             
         }
-        // TODO Fazer página de confirmação de deleção e função de deleção
     }//GEN-LAST:event_removerActionPerformed
 
     private void alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarActionPerformed
@@ -246,6 +256,11 @@ public class JFrameTabela extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_inserirActionPerformed
+
+    private void consultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaActionPerformed
+        // TODO Colocar consulta de foreign keys dependendo da tabela e linha selecionada
+        // usar consulta.getSelectedItem()
+    }//GEN-LAST:event_consultaActionPerformed
 
         /**
      * @param args the command line arguments
@@ -285,8 +300,9 @@ public class JFrameTabela extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> SelecaoTabela;
     private javax.swing.JButton alterar;
+    private javax.swing.JComboBox<String> consulta;
     private javax.swing.JButton inserir;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton remover;
     private javax.swing.JTable tabela;

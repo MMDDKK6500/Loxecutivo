@@ -23,7 +23,7 @@ public class TableHelper {
             }
             
         } catch(SQLException e) {
-            
+            // CERTAMENTE, nunca vai dar erro aqui confia
         }
         return model;
     }
