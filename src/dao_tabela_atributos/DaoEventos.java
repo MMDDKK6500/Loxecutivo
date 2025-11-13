@@ -1,14 +1,11 @@
 package dao_tabela_atributos;
-import java.sql.Connection;
-import mysql.Conexao;
+
 import tabela_atributos.Evento;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
 public class DaoEventos extends DaoBase {
-    private Conexao conexao;
-    private Connection conectar;
 
     public DaoEventos() {
         this.tabela = "eventos";

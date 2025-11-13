@@ -1,14 +1,11 @@
 package dao_tabela_atributos;
-import java.sql.Connection;
-import mysql.Conexao;
+
 import tabela_atributos.Endereco;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
 public class DaoEnderecos extends DaoBase {
-    private Conexao conexao;
-    private Connection conectar;
 
     public DaoEnderecos() {
         this.tabela = "enderecos";

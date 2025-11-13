@@ -1,6 +1,5 @@
 package dao_tabela_atributos;
-import java.sql.Connection;
-import mysql.Conexao;
+
 import tabela_atributos.Veiculo;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

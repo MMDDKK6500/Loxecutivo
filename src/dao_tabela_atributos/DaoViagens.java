@@ -1,15 +1,11 @@
 package dao_tabela_atributos;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import mysql.Conexao;
 import tabela_atributos.Viagem;
 
 public class DaoViagens extends DaoBase {
-    private Conexao conexao;
-    private Connection conectar;
 
     public DaoViagens() {
         this.tabela = "viagens";
