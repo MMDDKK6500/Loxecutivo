@@ -30,6 +30,7 @@ public class JFrameTabela extends javax.swing.JFrame {
         SelecaoTabela = new javax.swing.JComboBox<>();
         alterar = new javax.swing.JButton();
         inserir = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +78,8 @@ public class JFrameTabela extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setPreferredSize(new java.awt.Dimension(95, 22));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,7 +98,8 @@ public class JFrameTabela extends javax.swing.JFrame {
                         .addComponent(alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(inserir)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,7 +113,8 @@ public class JFrameTabela extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(remover)
                     .addComponent(alterar)
-                    .addComponent(inserir))
+                    .addComponent(inserir)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -175,39 +180,39 @@ public class JFrameTabela extends javax.swing.JFrame {
                     DaoEnderecos den = new DaoEnderecos();
                     den.removeByID(Integer.parseInt(id));
                     rs = den.getResultSet();
-                    tabela.setModel(TableHelper.modelFromRS(rs));
                     break;
                 case 1:
                     DaoEventos dev = new DaoEventos();
                     dev.removeByID(Integer.parseInt(id));
                     rs = dev.getResultSet();
-                    tabela.setModel(TableHelper.modelFromRS(rs));
                     break;
                 case 2:
                     DaoMotoristas dm = new DaoMotoristas();
                     dm.removeByID(Integer.parseInt(id));
                     rs = dm.getResultSet();
-                    tabela.setModel(TableHelper.modelFromRS(rs));
                     break;
                 case 3:
                     DaoPassageiros dp = new DaoPassageiros();
                     dp.removeByID(Integer.parseInt(id));
                     rs = dp.getResultSet();
-                    tabela.setModel(TableHelper.modelFromRS(rs));
                     break;                
                 case 4:
                     DaoVeiculos dv = new DaoVeiculos();
                     dv.removeByID(id);
                     rs = dv.getResultSet();
-                    tabela.setModel(TableHelper.modelFromRS(rs));
                     break;
                 case 5:
                     DaoViagens dvi = new DaoViagens();
                     dvi.removeByID(Integer.parseInt(id));
                     rs = dvi.getResultSet();
-                    tabela.setModel(TableHelper.modelFromRS(rs));
+                    break;
+                default:
+                    DaoViagens dvi2 = new DaoViagens();
+                    dvi2.removeByID(Integer.parseInt(id));
+                    rs = dvi2.getResultSet();
                     break;
                 }
+                tabela.setModel(TableHelper.modelFromRS(rs));
             }
             
         }
@@ -231,7 +236,7 @@ public class JFrameTabela extends javax.swing.JFrame {
             case 3:
                 break;                
             case 4:
-                JFrameVeiculo veiculo = new JFrameVeiculo();
+                JDialogVeiculo veiculo = new JDialogVeiculo();
                 veiculo.setVisible(true);
                 break;
             case 5:
@@ -259,13 +264,13 @@ public class JFrameTabela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDialogVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -281,6 +286,7 @@ public class JFrameTabela extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> SelecaoTabela;
     private javax.swing.JButton alterar;
     private javax.swing.JButton inserir;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton remover;
     private javax.swing.JTable tabela;

@@ -6,12 +6,13 @@ import tabela_atributos.Veiculo;
 import java.sql.SQLException;
 import javax.swing.Timer;
 
-public class JFrameViagem extends javax.swing.JFrame {
+public class JDialogViagem extends javax.swing.JDialog {
 
     /**
      * Creates new form JFrameTeste
      */
-    public JFrameViagem() {
+    public JDialogViagem() {
+        setModal(true);
         initComponents();
     }
 
