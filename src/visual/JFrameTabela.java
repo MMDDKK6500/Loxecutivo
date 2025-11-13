@@ -2,10 +2,9 @@ package visual;
 
 import dao_tabela_atributos.*;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import javax.swing.table.DefaultTableModel;
-import java.sql.SQLException;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
+import util.TableHelper;
 
 public class JFrameTabela extends javax.swing.JFrame {
 
@@ -26,7 +25,7 @@ public class JFrameTabela extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         remover = new javax.swing.JButton();
         SelecaoTabela = new javax.swing.JComboBox<>();
         alterar = new javax.swing.JButton();
@@ -34,7 +33,7 @@ public class JFrameTabela extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -45,8 +44,8 @@ public class JFrameTabela extends javax.swing.JFrame {
 
             }
         ));
-        jTable1.setToolTipText("");
-        jScrollPane1.setViewportView(jTable1);
+        tabela.setToolTipText("");
+        jScrollPane1.setViewportView(tabela);
 
         remover.setText("Remover Dados Selecionados");
         remover.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +55,8 @@ public class JFrameTabela extends javax.swing.JFrame {
         });
 
         SelecaoTabela.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Endereços", "Eventos", "Motoristas", "Passageiros", "Veiculos", "Viagens" }));
+        SelecaoTabela.setSelectedIndex(-1);
+        SelecaoTabela.setToolTipText("");
         SelecaoTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelecaoTabelaActionPerformed(evt);
@@ -143,40 +144,73 @@ public class JFrameTabela extends javax.swing.JFrame {
                 rs = dvi.getResultSet();
                 break;
         }
-        DefaultTableModel model = new DefaultTableModel();
-        try {
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();  
-            for (int i = 1; i <= columnCount; i++) {  
-                model.addColumn(metaData.getColumnName(i));
-            }
-            while (rs.next()) {  
-                Object[] rowData = new Object[columnCount];
-                for (int i = 1; i <= columnCount; i++) {  
-                    rowData[i - 1] = rs.getObject(i);
-                }
-                model.addRow(rowData);
-            }
-            jTable1.setModel(model);
-        } catch(SQLException e) {
-            
-        }
+        tabela.setModel(TableHelper.modelFromRS(rs));
     }//GEN-LAST:event_SelecaoTabelaActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
-        String[] placas = new String[jTable1.getSelectedRowCount()];
-        int indexPlacas = 0;
+        String[] ids = new String[tabela.getSelectedRowCount()];
+        int indexids = 0;
         
         // O(n²) - duas for nested
-        for (int y : jTable1.getSelectedRows()) {
-            for (int x = 0; x < jTable1.getColumnCount() - 1; x++) {
+        for (int y : tabela.getSelectedRows()) {
+            for (int x = 0; x < tabela.getColumnCount() - 1; x++) {
                 if (x == 0) {
-                    placas[indexPlacas] = (String)jTable1.getModel().getValueAt(y, x);
-                    indexPlacas++;
+                    ids[indexids] = (String)tabela.getModel().getValueAt(y, x);
+                    indexids++;
                 }
             }
         }
-        System.out.println(Arrays.toString(placas));
+        
+        if (ids.length == 0) {
+            JOptionPane.showMessageDialog(this, "Nenhum dado selecionado", "Erro", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int confirmacao = JOptionPane.showConfirmDialog(this, "Certeza que quer apagar esses dados?\n" + Arrays.toString(ids), "Confirmação", JOptionPane.ERROR_MESSAGE);
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            ResultSet rs;
+            for (String id : ids) {
+            switch (SelecaoTabela.getSelectedIndex()) {
+                case 0:
+                    DaoEnderecos den = new DaoEnderecos();
+                    den.removeByID(Integer.parseInt(id));
+                    rs = den.getResultSet();
+                    tabela.setModel(TableHelper.modelFromRS(rs));
+                    break;
+                case 1:
+                    DaoEventos dev = new DaoEventos();
+                    dev.removeByID(Integer.parseInt(id));
+                    rs = dev.getResultSet();
+                    tabela.setModel(TableHelper.modelFromRS(rs));
+                    break;
+                case 2:
+                    DaoMotoristas dm = new DaoMotoristas();
+                    dm.removeByID(Integer.parseInt(id));
+                    rs = dm.getResultSet();
+                    tabela.setModel(TableHelper.modelFromRS(rs));
+                    break;
+                case 3:
+                    DaoPassageiros dp = new DaoPassageiros();
+                    dp.removeByID(Integer.parseInt(id));
+                    rs = dp.getResultSet();
+                    tabela.setModel(TableHelper.modelFromRS(rs));
+                    break;                
+                case 4:
+                    DaoVeiculos dv = new DaoVeiculos();
+                    dv.removeByID(id);
+                    rs = dv.getResultSet();
+                    tabela.setModel(TableHelper.modelFromRS(rs));
+                    break;
+                case 5:
+                    DaoViagens dvi = new DaoViagens();
+                    dvi.removeByID(Integer.parseInt(id));
+                    rs = dvi.getResultSet();
+                    tabela.setModel(TableHelper.modelFromRS(rs));
+                    break;
+                }
+            }
+            
+        }
         // TODO Fazer página de confirmação de deleção e função de deleção
     }//GEN-LAST:event_removerActionPerformed
 
@@ -187,6 +221,25 @@ public class JFrameTabela extends javax.swing.JFrame {
 
     private void inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirActionPerformed
         // TODO Criar tela de Inserção de dados, criar uma para cada tabela.
+        switch (SelecaoTabela.getSelectedIndex()) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;                
+            case 4:
+                JFrameVeiculo veiculo = new JFrameVeiculo();
+                veiculo.setVisible(true);
+                break;
+            case 5:
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "Nenhuma tabela selecionada", "Erro", JOptionPane.WARNING_MESSAGE);
+                break;
+        }
     }//GEN-LAST:event_inserirActionPerformed
 
         /**
@@ -206,13 +259,13 @@ public class JFrameTabela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameTeste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameVeiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -229,7 +282,7 @@ public class JFrameTabela extends javax.swing.JFrame {
     private javax.swing.JButton alterar;
     private javax.swing.JButton inserir;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton remover;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

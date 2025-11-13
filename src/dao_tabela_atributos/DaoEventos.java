@@ -12,6 +12,7 @@ public class DaoEventos extends DaoBase {
 
     public DaoEventos() {
         this.tabela = "eventos";
+        this.id = "id_evento";
     }
     
     public void InserirDados(Evento evento) {

@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import mysql.Conexao;
 
 public class DaoBase {
-    private Conexao conexao;
-    private Connection conectar;
+    protected Conexao conexao;
+    protected Connection conectar;
     protected String tabela;
+    protected String id;
     
     public DaoBase() {
         this.conexao = new Conexao();
@@ -25,6 +26,19 @@ public class DaoBase {
         } catch (SQLException e) {
             System.out.println("Tabela não encontrado" + e.getMessage());
             return null;
+        }
+    }
+    
+    public boolean removeByID(int id) {
+        String sql = "DELETE FROM " + this.tabela + " WHERE " + this.id + " = ?";
+        try {
+            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar da tabela: " + e.getMessage());
+            return false;
         }
     }
 }

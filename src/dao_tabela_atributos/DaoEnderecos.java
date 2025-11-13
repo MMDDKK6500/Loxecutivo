@@ -12,6 +12,7 @@ public class DaoEnderecos extends DaoBase {
 
     public DaoEnderecos() {
         this.tabela = "enderecos";
+        this.id = "id_endereco";
     }
     
     public void InserirDados(Endereco endereco) {

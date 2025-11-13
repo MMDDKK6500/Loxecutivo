@@ -6,12 +6,12 @@ import tabela_atributos.Veiculo;
 import java.sql.SQLException;
 import javax.swing.Timer;
 
-public class JFrameTeste extends javax.swing.JFrame {
+public class JFrameVeiculo extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameTeste
      */
-    public JFrameTeste() {
+    public JFrameVeiculo() {
         initComponents();
     }
 
@@ -38,7 +38,7 @@ public class JFrameTeste extends javax.swing.JFrame {
         mensagem = new javax.swing.JLabel();
         erro = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setText("Inserir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -151,14 +151,6 @@ public class JFrameTeste extends javax.swing.JFrame {
             dv.InserirDados(veiculo);
             mensagem.setText("Veículo inserido no banco de dados!");
             erro.setText("");
-            new Timer(5_000, (e) -> {
-                JFrameTabela tabela = new JFrameTabela();
-                tabela.setVisible(true);
-                dispose();
-            }){{
-            setRepeats(false); // Run only once
-            start();
-            }};
         } catch(SQLException e) {
             mensagem.setText("Falha ao inserir dados no banco! Consultar desenvolvedor com esta mensagem de erro:");
             erro.setText(e.getMessage());

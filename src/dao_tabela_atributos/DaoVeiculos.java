@@ -7,11 +7,10 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 public class DaoVeiculos extends DaoBase {
-    private Conexao conexao;
-    private Connection conectar;
 
     public DaoVeiculos() {
         this.tabela = "veiculos";
+        this.id = "id_placa";
     }
     
     public void InserirDados(Veiculo veiculo) throws SQLException {
@@ -48,6 +47,19 @@ public class DaoVeiculos extends DaoBase {
         } catch (SQLException e) {
             System.out.println("Id não encontrado" + e.getMessage());
             throw e;
+        }
+    }
+    
+    public boolean removeByID(String id) {
+        String sql = "DELETE FROM " + this.tabela + " WHERE " + this.id + " = ?";
+        try {
+            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            stmt.setString(1, id);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar da tabela: " + e.getMessage());
+            return false;
         }
     }
 }
