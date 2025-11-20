@@ -10,6 +10,7 @@ public class DaoViagens extends DaoBase {
     public DaoViagens() {
         this.tabela = "viagens";
         this.id = "id_viagem";
+        this.idIndex = 3;
     }
     
     public void InserirDados(Viagem viagem) {

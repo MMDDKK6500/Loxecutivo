@@ -10,6 +10,7 @@ public class DaoMotoristas extends DaoBase {
     public DaoMotoristas() {
         this.tabela = "motoristas";
         this.id = "id_motorista";
+        this.idIndex = 5;
     }
     
     public void InserirDados(Motorista motorista) {

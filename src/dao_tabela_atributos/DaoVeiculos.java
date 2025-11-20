@@ -10,6 +10,7 @@ public class DaoVeiculos extends DaoBase {
     public DaoVeiculos() {
         this.tabela = "veiculos";
         this.id = "id_placa";
+        this.idIndex = 1;
     }
     
     public void InserirDados(Veiculo veiculo) throws SQLException {

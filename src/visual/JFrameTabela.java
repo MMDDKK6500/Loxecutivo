@@ -3,7 +3,11 @@ package visual;
 import dao_tabela_atributos.*;
 import java.sql.ResultSet;
 import java.util.Arrays;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
+import util.SQLHelper;
 import util.TableHelper;
 
 public class JFrameTabela extends javax.swing.JFrame {
@@ -93,7 +97,7 @@ public class JFrameTabela extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(825, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SelecaoTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
             .addGroup(layout.createSequentialGroup()
@@ -109,7 +113,7 @@ public class JFrameTabela extends javax.swing.JFrame {
                         .addGap(84, 84, 84)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(consulta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(consulta, 0, 183, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -160,18 +164,46 @@ public class JFrameTabela extends javax.swing.JFrame {
                 rs = dvi.getResultSet();
                 break;
         }
-        tabela.setModel(TableHelper.modelFromRS(rs));
+        DefaultTableModel model = TableHelper.modelFromRS(rs);
+        tabela.setModel(model);
+        
+        
+        // Criar um listener para ver quando uma celula é mudada
+        model.addTableModelListener(new TableModelListener() {
+            public void tableChanged(TableModelEvent e) {
+                // Check for update type
+                if (e.getType() == TableModelEvent.UPDATE) {
+                    int row = e.getFirstRow();
+                    int column = e.getColumn();
+                    Object data = model.getValueAt(row, column);
+                    System.out.println("Updated value at row " + row + ", column " + column + ": " + data);
+                }
+            }
+        });
     }//GEN-LAST:event_SelecaoTabelaActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
+        DaoEventos dev = new DaoEventos();
+        DaoViagens dvi = new DaoViagens();
+        DaoMotoristas dm = new DaoMotoristas();
+        DaoVeiculos dv = new DaoVeiculos();
+        DaoPassageiros dp = new DaoPassageiros();
+        
         String[] ids = new String[tabela.getSelectedRowCount()];
         int indexids = 0;
         
         // O(n²) - duas for nested
         for (int y : tabela.getSelectedRows()) {
-            for (int x = 0; x < tabela.getColumnCount() - 1; x++) {
-                if (x == 0) {
-                    ids[indexids] = (String)tabela.getModel().getValueAt(y, x);
+            for (int x = 0; x < tabela.getColumnCount(); x++) {
+                System.out.println("x: " + x + " y: " + y + " " + tabela.getColumnName(x));
+                if (tabela.getColumnName(x).startsWith("id_")) {
+                    String into;
+                    try {
+                        into = (String)tabela.getModel().getValueAt(y, x);
+                    } catch (ClassCastException ex) {
+                        into = String.valueOf(tabela.getModel().getValueAt(y, x));
+                    }
+                    ids[indexids] = into;
                     indexids++;
                 }
             }
@@ -181,6 +213,33 @@ public class JFrameTabela extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nenhum dado selecionado", "Erro", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        switch (SelecaoTabela.getSelectedIndex()) {
+            case 0:
+                //Endereços
+                //dev.checkDependency(ids);
+                //dvi.checkDependency(ids);
+                break;
+            case 1:
+                //Eventos
+                break;
+            case 2:
+                //Motoristas
+                break;
+           case 3:
+               //Passageiros
+                 break;                
+            case 4:
+                //Veiculos
+                break;
+            case 5:
+                //Viagens
+                break;
+            default:
+                DaoViagens dvi2 = new DaoViagens();
+                break;
+        }
+        
         
         int confirmacao = JOptionPane.showConfirmDialog(this, "Certeza que quer apagar esses dados?\n" + Arrays.toString(ids), "Confirmação", JOptionPane.ERROR_MESSAGE);
         if (confirmacao == JOptionPane.YES_OPTION) {
@@ -193,27 +252,22 @@ public class JFrameTabela extends javax.swing.JFrame {
                     rs = den.getResultSet();
                     break;
                 case 1:
-                    DaoEventos dev = new DaoEventos();
                     dev.removeByID(Integer.parseInt(id));
                     rs = dev.getResultSet();
                     break;
                 case 2:
-                    DaoMotoristas dm = new DaoMotoristas();
                     dm.removeByID(Integer.parseInt(id));
                     rs = dm.getResultSet();
                     break;
                 case 3:
-                    DaoPassageiros dp = new DaoPassageiros();
                     dp.removeByID(Integer.parseInt(id));
                     rs = dp.getResultSet();
                     break;                
                 case 4:
-                    DaoVeiculos dv = new DaoVeiculos();
                     dv.removeByID(id);
                     rs = dv.getResultSet();
                     break;
                 case 5:
-                    DaoViagens dvi = new DaoViagens();
                     dvi.removeByID(Integer.parseInt(id));
                     rs = dvi.getResultSet();
                     break;
@@ -225,7 +279,6 @@ public class JFrameTabela extends javax.swing.JFrame {
                 }
                 tabela.setModel(TableHelper.modelFromRS(rs));
             }
-            
         }
     }//GEN-LAST:event_removerActionPerformed
 

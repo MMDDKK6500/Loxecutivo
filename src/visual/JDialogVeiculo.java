@@ -151,6 +151,7 @@ public class JDialogVeiculo extends javax.swing.JDialog {
             mensagem.setText("Inserindo no banco de dados...");
             dv.InserirDados(veiculo);
             mensagem.setText("Veículo inserido no banco de dados!");
+            jButton1.setEnabled(false);
             erro.setText("");
             new Timer(5_000, (e) -> {
                 dispose();

@@ -11,6 +11,7 @@ public class DaoPassageiros extends DaoBase {
     public DaoPassageiros() {
         this.tabela = "passageiros";
         this.id = "id_passageiro";
+        this.idIndex = 4;
     }
     
     public void InserirDados(Passageiro passageiro) {

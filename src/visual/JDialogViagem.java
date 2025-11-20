@@ -152,6 +152,7 @@ public class JDialogViagem extends javax.swing.JDialog {
             dv.InserirDados(veiculo);
             mensagem.setText("Veículo inserido no banco de dados!");
             erro.setText("");
+            jButton1.setEnabled(false);
         } catch(SQLException e) {
             mensagem.setText("Falha ao inserir dados no banco! Consultar desenvolvedor com esta mensagem de erro:");
             erro.setText(e.getMessage());
