@@ -4,6 +4,8 @@ import tabela_atributos.Endereco;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 public class DaoEnderecos extends DaoBase {
 
@@ -48,5 +50,76 @@ public class DaoEnderecos extends DaoBase {
             System.out.println("Id não encontrado" + e.getMessage());
             return null;
         }
+    }
+    
+    
+    public void checkDependencias(String[] ids) throws Exception {
+        
+        String[] options = {"Confirmar", "Trocar id de todos", "Cancelar"};
+        
+        DaoViagens dvi = new DaoViagens();
+        ResultSet dviRS = dvi.getResultSet();
+        int[] dviFK = {1, 2};
+        
+        try {
+            while (dviRS.next()) {
+                for (int i = 0; i < dviFK.length; i++) {
+                    for (int j = 0; j < ids.length; j++) {
+                        if (ids[j].equals(String.valueOf(dviRS.getInt(dviFK[i])))) {
+                            System.out.println("Conflito com viagens  de id: " + dviRS.getInt(dvi.idIndex));
+                        }
+                    }
+                } 
+            }
+        } catch (SQLException ex) {
+                System.out.println("Erro: " + ex);
+        }
+        
+        int confirmacao = JOptionPane.showOptionDialog(null, "Os dados que você quer apagar estão vinculados a outros dados no banco de dados,\na deleção dos dados irão resultar na deleção destes outros dados também, tem certeza que quer fazer isso?\n" + Arrays.toString(ids), "Conflito", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, options, options[0]);
+        switch (confirmacao) {
+            case 0:
+                break;
+            case 1:
+                String novoId = JOptionPane.showInputDialog(null, "Trocar por qual id?");
+                System.out.println(novoId);
+                break;
+            case 2:
+                throw new Exception();
+        }
+        
+        DaoEventos dve = new DaoEventos();
+        ResultSet dveRS = dve.getResultSet();
+        int[] dveFK = {3};
+        
+        try {
+            while (dveRS.next()) {
+                for (int i = 0; i < dveFK.length; i++) {
+                    for (int j = 0; j < ids.length; j++) {
+                        if (ids[j].equals(String.valueOf(dveRS.getInt(dveFK[i])))) {
+                            System.out.println("Conflito com eventos de id: " + dveRS.getInt(dve.idIndex));
+                        }
+                    }
+                } 
+            }
+        } catch (SQLException ex) {
+                System.out.println("Erro: " + ex);
+        }
+        
+        int confirmacao2 = JOptionPane.showOptionDialog(null, "Os dados que você quer apagar estão vinculados a outros dados no banco de dados,\na deleção dos dados irão resultar na deleção destes outros dados também, tem certeza que quer fazer isso?\n" + Arrays.toString(ids), "Conflito", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, options, options[0]);
+        switch (confirmacao2) {
+            case 0:
+                break;
+            case 1:
+                String novoId = JOptionPane.showInputDialog(null, "Trocar por qual id?");
+                System.out.println(novoId);
+                break;
+            case 2:
+                throw new Exception();
+        }
+        
+        //TODO: Fazer resto do sistema
+        
+        dvi.getResultSet();
+        
     }
 }
