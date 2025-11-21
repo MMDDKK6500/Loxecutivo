@@ -10,7 +10,7 @@ public class Motorista {
     public int getId_Motorista() {
         return id_motorista;
     }
-
+    
     public void setId_Motorista(int id_motorista) {
         this.id_motorista = id_motorista;
     }

@@ -14,7 +14,7 @@ public class DaoPassageiros extends DaoBase {
         this.idIndex = 4;
     }
     
-    public void InserirDados(Passageiro passageiro) {
+    public void InserirDados(Passageiro passageiro) throws SQLException {
         String sql = "INSERT INTO passageiros " + " (nome, sobrenome, numero, empresa, rg, cpf, id_viagem)" + " VALUES ( ? , ? , ? , ? , ? , ? , ? )"; 
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);

@@ -297,6 +297,8 @@ public class JFrameTabela extends javax.swing.JFrame {
             case 2:
                 break;
             case 3:
+                JDialogPassageiros passageiro = new JDialogPassageiros();
+                passageiro.setVisible(true);
                 break;                
             case 4:
                 JDialogVeiculo veiculo = new JDialogVeiculo();
