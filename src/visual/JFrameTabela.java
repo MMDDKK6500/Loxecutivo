@@ -188,6 +188,7 @@ public class JFrameTabela extends javax.swing.JFrame {
         DaoMotoristas dm = new DaoMotoristas();
         DaoVeiculos dv = new DaoVeiculos();
         DaoPassageiros dp = new DaoPassageiros();
+        DaoEnderecos de = new DaoEnderecos();
         
         String[] ids = new String[tabela.getSelectedRowCount()];
         int indexids = 0;
@@ -195,7 +196,7 @@ public class JFrameTabela extends javax.swing.JFrame {
         // O(n²) - duas for nested
         for (int y : tabela.getSelectedRows()) {
             for (int x = 0; x < tabela.getColumnCount(); x++) {
-                System.out.println("x: " + x + " y: " + y + " " + tabela.getColumnName(x));
+                //System.out.println("x: " + x + " y: " + y + " " + tabela.getColumnName(x));
                 if (tabela.getColumnName(x).startsWith("id_")) {
                     String into;
                     try {
@@ -214,34 +215,37 @@ public class JFrameTabela extends javax.swing.JFrame {
             return;
         }
         
-        switch (SelecaoTabela.getSelectedIndex()) {
-            case 0:
-                //Endereços
-                //dev.checkDependency(ids);
-                //dvi.checkDependency(ids);
-                break;
-            case 1:
-                //Eventos
-                break;
-            case 2:
-                //Motoristas
-                break;
-           case 3:
-               //Passageiros
-                 break;                
-            case 4:
-                //Veiculos
-                break;
-            case 5:
-                //Viagens
-                break;
-            default:
-                DaoViagens dvi2 = new DaoViagens();
-                break;
+        try {
+            switch (SelecaoTabela.getSelectedIndex()) {
+                case 0:
+                    //Endereços
+                    de.checkDependencias(ids);
+                    break;
+                case 1:
+                    //Eventos
+                    break;
+                case 2:
+                    //Motoristas
+                    break;
+               case 3:
+                   //Passageiros
+                     break;                
+                case 4:
+                    //Veiculos
+                    break;
+                case 5:
+                    //Viagens
+                    break;
+                default:
+                    DaoViagens dvi2 = new DaoViagens();
+                    break;
+            }
+        } catch (Exception ex) {
+            return;
         }
         
         
-        int confirmacao = JOptionPane.showConfirmDialog(this, "Certeza que quer apagar esses dados?\n" + Arrays.toString(ids), "Confirmação", JOptionPane.ERROR_MESSAGE);
+        int confirmacao = JOptionPane.showConfirmDialog(this, "Certeza que quer apagar os dados com ids:\n" + Arrays.toString(ids), "Confirmação", JOptionPane.ERROR_MESSAGE);
         if (confirmacao == JOptionPane.YES_OPTION) {
             ResultSet rs;
             for (String id : ids) {
