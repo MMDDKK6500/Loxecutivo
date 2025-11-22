@@ -13,7 +13,7 @@ public class DaoEventos extends DaoBase {
         this.idIndex = 2;
     }
     
-    public void InserirDados(Evento evento) {
+    public void InserirDados(Evento evento)throws SQLException  {
         String sql = "INSERT INTO eventos (nome, id_endereco) VALUES (?, ?)";
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);

@@ -9,9 +9,9 @@ public class Conexao {
   public Connection getConexao() {
       
     try {
-      String endereco = "jdbc:mysql://127.0.0.1:3306/Loxecutivo";
-      String usuario = "root";
-      String senha = "";
+      String endereco = "jdbc:mysql://144.22.229.211:3306/loxecutivo";
+      String usuario = "aula";
+      String senha = "3654";
       Class.forName("com.mysql.cj.jdbc.Driver");
       Connection conectar = DriverManager.getConnection(endereco, usuario, senha);
       

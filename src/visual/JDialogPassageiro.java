@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import javax.swing.Timer;
 import tabela_atributos.Passageiro;
 
-public class JDialogPassageiros extends javax.swing.JDialog {
+public class JDialogPassageiro extends javax.swing.JDialog {
 
     /**
      * Creates new form JFrameTeste
      */
-    public JDialogPassageiros() {
+    public JDialogPassageiro() {
         setModal(true);
         initComponents();
     }

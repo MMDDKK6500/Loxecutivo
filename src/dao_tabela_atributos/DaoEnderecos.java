@@ -15,7 +15,7 @@ public class DaoEnderecos extends DaoBase {
         this.idIndex = 6;
     }
     
-    public void InserirDados(Endereco endereco) {
+    public void InserirDados(Endereco endereco) throws SQLException{
         String sql = "INSERT INTO enderecos (rua, numero, bairro, cidade, uf) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);

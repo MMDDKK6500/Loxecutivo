@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-public class DaoMotoristas extends DaoBase {
+public class DaoMotoristas extends DaoBase  {
 
     public DaoMotoristas() {
         this.tabela = "motoristas";
@@ -13,7 +13,7 @@ public class DaoMotoristas extends DaoBase {
         this.idIndex = 5;
     }
     
-    public void InserirDados(Motorista motorista) {
+    public void InserirDados(Motorista motorista)throws SQLException {
         String sql = "INSERT INTO motoristas (nome, sobrenome, rg, cpf) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);

@@ -13,7 +13,7 @@ public class DaoViagens extends DaoBase {
         this.idIndex = 3;
     }
     
-    public void InserirDados(Viagem viagem) {
+    public void InserirDados(Viagem viagem) throws SQLException{
         String sql = "INSERT INTO viagens " + " (local_de_origem, local_de_destino, id_motorista, id_veiculo, id_evento)" + " VALUES ( ? , ? , ? , ? , ? )"; 
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);

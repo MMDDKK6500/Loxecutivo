@@ -295,13 +295,19 @@ public class JFrameTabela extends javax.swing.JFrame {
         // TODO Criar tela de Inserção de dados, criar uma para cada tabela.
         switch (SelecaoTabela.getSelectedIndex()) {
             case 0:
+                JDialog endereco = new JDialogEndereco();
+                endereco.setVisible(true);
                 break;
             case 1:
+                JDialog evento = new JDialogEvento();
+                evento.setVisible(true);
                 break;
             case 2:
+                JDialog motoristas = new JDialogMotorista();
+                motoristas.setVisible(true);
                 break;
             case 3:
-                JDialogPassageiros passageiro = new JDialogPassageiros();
+                JDialogPassageiro passageiro = new JDialogPassageiro();
                 passageiro.setVisible(true);
                 break;                
             case 4:
@@ -309,6 +315,8 @@ public class JFrameTabela extends javax.swing.JFrame {
                 veiculo.setVisible(true);
                 break;
             case 5:
+                JDialogViagem viagem = new JDialogViagem();
+                viagem.setVisible(true);
                 break;
             default:
                 JOptionPane.showMessageDialog(this, "Nenhuma tabela selecionada", "Erro", JOptionPane.WARNING_MESSAGE);
