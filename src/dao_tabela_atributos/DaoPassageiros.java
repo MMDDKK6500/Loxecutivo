@@ -36,7 +36,7 @@ public class DaoPassageiros extends DaoBase {
         String sql = "SELECT * FROM passageiros WHERE id = ?";
 
         try {
-            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setInt(1, id);
             ResultSet rs_TabelaPassageiros = stmt.executeQuery();
             Passageiro passageiros = new Passageiro();

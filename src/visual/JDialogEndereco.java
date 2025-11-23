@@ -15,13 +15,30 @@ import tabela_atributos.Passageiro;
 import tabela_atributos.Viagem;
 
 public class JDialogEndereco extends javax.swing.JDialog {
-
+    
+    private boolean isAlter = false;
+    private int alterId;
+    
     /**
      * Creates new form JFrameTeste
      */
     public JDialogEndereco() {
         setModal(true);
         initComponents();
+    }
+    
+    public JDialogEndereco(boolean isAlter, Endereco e) {
+        setModal(true);
+        initComponents();
+        if (isAlter) {
+            this.isAlter = true;
+            alterId = e.getId_Endereco();
+            rua.setText(e.getRua());
+            numero.setText(String.valueOf(e.getNumero()));
+            bairro.setText(e.getBairro());
+            cidade.setText(e.getCidade());
+            uf.setText(e.getUf());
+        }
     }
 
     /**
@@ -56,12 +73,6 @@ public class JDialogEndereco extends javax.swing.JDialog {
             }
         });
 
-        rua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ruaActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Rua");
 
         jLabel2.setText("numero");
@@ -76,69 +87,48 @@ public class JDialogEndereco extends javax.swing.JDialog {
         erro.setMinimumSize(new java.awt.Dimension(187, 16));
         erro.setPreferredSize(new java.awt.Dimension(187, 16));
 
-        uf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ufActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("cidade");
 
         jLabel7.setText("uf");
-
-        cidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cidadeActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(erro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabel1)
                         .addGap(96, 96, 96)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(rua, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(RG1)
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(173, 173, 173)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(45, 45, 45))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(rua, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel2)
+                    .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RG1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(0, 18, Short.MAX_VALUE))
+            .addComponent(mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(287, 287, 287))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,9 +147,9 @@ public class JDialogEndereco extends javax.swing.JDialog {
                     .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addComponent(jButton1)
                 .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(12, 12, 12)
                 .addComponent(mensagem)
                 .addGap(2, 2, 2)
                 .addComponent(erro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,6 +162,7 @@ public class JDialogEndereco extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
         Endereco e = new Endereco();
+        e.setId_Endereco(alterId);
         e.setRua(rua.getText());
         e.setNumero(Integer.parseInt(numero.getText()));
         e.setBairro(bairro.getText());
@@ -182,7 +173,12 @@ public class JDialogEndereco extends javax.swing.JDialog {
 
         try {
             mensagem.setText("Inserindo no banco de dados...");
-            de.InserirDados(e);
+            
+            if (isAlter) {
+                de.alterarDados(e);
+            } else {
+                de.InserirDados(e);
+            }
             mensagem.setText("Endereço inserido com sucesso!");
             jButton1.setEnabled(false);
            erro.setText("");
@@ -197,18 +193,6 @@ public class JDialogEndereco extends javax.swing.JDialog {
 }
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void ufActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ufActionPerformed
-
-    private void ruaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ruaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ruaActionPerformed
-
-    private void cidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cidadeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

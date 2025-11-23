@@ -33,7 +33,7 @@ public class DaoViagens extends DaoBase {
         String sql = "SELECT * FROM viagens WHERE id = ?";
 
         try {
-            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setInt(1, id);
             ResultSet rs_TabelaViagens = stmt.executeQuery();
             Viagem viagem = new Viagem();

@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import util.SQLHelper;
+import tabela_atributos.*;
 import util.TableHelper;
 
 public class JFrameTabela extends javax.swing.JFrame {
@@ -287,23 +287,71 @@ public class JFrameTabela extends javax.swing.JFrame {
     }//GEN-LAST:event_removerActionPerformed
 
     private void alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarActionPerformed
-        // TODO Adicionar código de alteração
-        // Pegar as linhas selecionadas, pegar os dados DA TABELA DA GUI de cada uma e atualizar elas no banco de dados
+        for (int i : tabela.getSelectedRows()) {    
+            switch (SelecaoTabela.getSelectedIndex()) {
+                case 0:
+                    DaoEnderecos den = new DaoEnderecos();
+                    int denId = (int)tabela.getModel().getValueAt(i, den.idIndex - 1);
+                    Endereco e = den.getEndereco(denId);
+                    JDialogEndereco endereco = new JDialogEndereco(true, e);
+                    endereco.setVisible(true);
+                    break;
+
+                case 1:
+                    DaoEventos dev = new DaoEventos();
+                    int devId = (int)tabela.getModel().getValueAt(i, dev.idIndex - 1);
+                    Evento ev = dev.getEvento(devId);
+                    JDialogEvento evento = new JDialogEvento(true, ev);
+                    evento.setVisible(true);
+                    break;
+                case 2:
+                    DaoMotoristas dm = new DaoMotoristas();
+                    int moId = (int)tabela.getModel().getValueAt(i, dm.idIndex - 1);
+                    Motorista mo = dm.getMotorista(moId);
+                    //JDialogMotorista motoristas = new JDialogMotorista(true, mo);
+                   // motoristas.setVisible(true);
+                    break;
+                case 3:
+                    DaoPassageiros dap = new DaoPassageiros();
+                    int paId = (int)tabela.getModel().getValueAt(i, dap.idIndex - 1);
+                    Passageiro pa = dap.getPassageiro(paId);
+                    //JDialogPassageiro passageiro = new JDialogPassageiro(true, pa);
+                    //passageiro.setVisible(true);
+                    break;                
+                case 4:
+                    DaoVeiculos dav = new DaoVeiculos();
+                    String veId = String.valueOf(tabela.getModel().getValueAt(i, dav.idIndex - 1));
+                    //Veiculo ve = dav.getVeiculo(veId);
+                    //JDialogVeiculo veiculo = new JDialogVeiculo(true, ve);
+                    //veiculo.setVisible(true);
+                    break;
+                case 5:
+                    DaoViagens dvi = new DaoViagens();
+                    int viId = (int)tabela.getModel().getValueAt(i, dvi.idIndex - 1);
+                    Viagem vi = dvi.getViagem(viId);
+                    //JDialogViagem viagem = new JDialogViagem(true, vi);
+                    //viagem.setVisible(true);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Nenhuma tabela selecionada", "Erro", JOptionPane.WARNING_MESSAGE);
+                    break;
+            }
+        }
     }//GEN-LAST:event_alterarActionPerformed
 
     private void inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirActionPerformed
         // TODO Criar tela de Inserção de dados, criar uma para cada tabela.
         switch (SelecaoTabela.getSelectedIndex()) {
             case 0:
-                JDialog endereco = new JDialogEndereco();
+                JDialogEndereco endereco = new JDialogEndereco();
                 endereco.setVisible(true);
                 break;
             case 1:
-                JDialog evento = new JDialogEvento();
+                JDialogEvento evento = new JDialogEvento();
                 evento.setVisible(true);
                 break;
             case 2:
-                JDialog motoristas = new JDialogMotorista();
+                JDialogMotorista motoristas = new JDialogMotorista();
                 motoristas.setVisible(true);
                 break;
             case 3:

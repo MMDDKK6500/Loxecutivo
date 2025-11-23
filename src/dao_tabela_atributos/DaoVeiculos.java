@@ -33,7 +33,7 @@ public class DaoVeiculos extends DaoBase {
     public Veiculo getVeiculo(String id) throws SQLException {
         String sql = "SELECT * FROM veiculos WHERE id_placa = ?";
         try {
-            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
             Veiculo veiculo = new Veiculo();

@@ -15,7 +15,7 @@ public class DaoBase {
     protected Connection conectar;
     protected String tabela;
     protected String id;
-    protected int idIndex;
+    public int idIndex;
     protected int[] foreignKeysIndex;
     
     public DaoBase() {

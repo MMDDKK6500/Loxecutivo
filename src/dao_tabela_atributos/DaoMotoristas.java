@@ -31,7 +31,7 @@ public class DaoMotoristas extends DaoBase  {
     public Motorista getMotorista(int id) {
         String sql = "SELECT * FROM motoristas WHERE id_motorista = ?";
         try {
-            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             Motorista motorista = new Motorista();

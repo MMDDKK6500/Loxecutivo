@@ -31,10 +31,23 @@ public class DaoEnderecos extends DaoBase {
         }
     }
     
+    public void alterarDados(Endereco endereco) throws SQLException {
+        String sql = "UPDATE enderecos SET rua = ?, numero = ?, bairro = ?, cidade = ?, uf = ? WHERE id_endereco = ?";
+        PreparedStatement stmt = this.conectar.prepareStatement(sql);
+        stmt.setString(1, endereco.getRua());
+        stmt.setInt(2, endereco.getNumero());
+        stmt.setString(3, endereco.getBairro());
+        stmt.setString(4, endereco.getCidade());
+        stmt.setString(5, endereco.getUf());
+        stmt.setInt(6, endereco.getId_Endereco());
+        stmt.execute();
+        stmt.close();
+    }
+    
     public Endereco getEndereco(int id) {
         String sql = "SELECT * FROM enderecos WHERE id_endereco = ?";
         try {
-            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             Endereco endereco = new Endereco();
