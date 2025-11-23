@@ -23,77 +23,46 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="viagem" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="localOrigem" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabel3" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="localDestino" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Motorista" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="jLabel5" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="Veiculo" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Evento" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="mensagem" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="erro" min="-2" pref="620" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jButton1" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="mensagem" alignment="2" pref="541" max="32767" attributes="0"/>
+                  <Component id="erro" alignment="2" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="escolherOrigem" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="localOrigem" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="escolherDestino" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="localDestino" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="escolherMotorista" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="Motorista" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jLabel4" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="escolherVeiculo" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="Veiculo" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="escolherEvento" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="Evento" alignment="2" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="jLabel6" alignment="2" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -103,7 +72,6 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -112,18 +80,25 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="viagem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="localOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="localDestino" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Motorista" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Veiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Evento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="escolherOrigem" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="escolherDestino" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="escolherMotorista" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="escolherVeiculo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="escolherEvento" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="mensagem" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="erro" min="-2" pref="16" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -138,13 +113,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="viagem">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Viagem"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="localOrigem">
     </Component>
@@ -161,9 +129,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="Motorista">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MotoristaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -203,6 +168,46 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Evento"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="escolherOrigem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Escolher&lt;br&gt;Origem&#xa;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="escolherOrigemActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="escolherDestino">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Escolher&lt;br&gt;Destino"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="escolherDestinoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="escolherMotorista">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Escolher&lt;br&gt;Motorista&#xa;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="escolherMotoristaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="escolherVeiculo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Escolher&lt;br&gt;Veiculo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="escolherVeiculoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="escolherEvento">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Escolher&lt;br&gt;Evento"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="escolherEventoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

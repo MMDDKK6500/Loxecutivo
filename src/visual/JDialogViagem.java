@@ -28,8 +28,6 @@ public class JDialogViagem extends javax.swing.JDialog {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        viagem = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         localOrigem = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         localDestino = new javax.swing.JTextField();
@@ -42,6 +40,11 @@ public class JDialogViagem extends javax.swing.JDialog {
         erro = new javax.swing.JLabel();
         Evento = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        escolherOrigem = new javax.swing.JButton();
+        escolherDestino = new javax.swing.JButton();
+        escolherMotorista = new javax.swing.JButton();
+        escolherVeiculo = new javax.swing.JButton();
+        escolherEvento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -52,17 +55,9 @@ public class JDialogViagem extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Viagem");
-
         jLabel2.setText("Local origem");
 
         jLabel3.setText("Local de destino");
-
-        Motorista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MotoristaActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Motorista");
 
@@ -78,62 +73,78 @@ public class JDialogViagem extends javax.swing.JDialog {
 
         jLabel6.setText("Evento");
 
+        escolherOrigem.setText("<html>Escolher<br>Origem\n");
+        escolherOrigem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escolherOrigemActionPerformed(evt);
+            }
+        });
+
+        escolherDestino.setText("<html>Escolher<br>Destino");
+        escolherDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escolherDestinoActionPerformed(evt);
+            }
+        });
+
+        escolherMotorista.setText("<html>Escolher<br>Motorista\n");
+        escolherMotorista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escolherMotoristaActionPerformed(evt);
+            }
+        });
+
+        escolherVeiculo.setText("<html>Escolher<br>Veiculo");
+        escolherVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escolherVeiculoActionPerformed(evt);
+            }
+        });
+
+        escolherEvento.setText("<html>Escolher<br>Evento");
+        escolherEvento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escolherEventoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jLabel1)
-                                .addGap(38, 38, 38))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(viagem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(localOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel3)
-                            .addComponent(localDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Motorista, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel5)
-                            .addComponent(Veiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Evento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 6, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6)
-                                .addGap(35, 35, 35))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(erro, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButton1)
+                    .addComponent(mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
+                    .addComponent(erro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(289, 289, 289)
-                .addComponent(jButton1)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(escolherOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(localOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(escolherDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(localDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(escolherMotorista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Motorista, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(escolherVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Veiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(escolherEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Evento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -141,7 +152,6 @@ public class JDialogViagem extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
@@ -149,17 +159,23 @@ public class JDialogViagem extends javax.swing.JDialog {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(localOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(localDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Motorista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Veiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Evento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(escolherOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(escolherDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(escolherMotorista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(escolherVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(escolherEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(8, 8, 8)
                 .addComponent(mensagem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(erro, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -168,16 +184,13 @@ public class JDialogViagem extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         
-        
         Viagem v = new Viagem();
 
         try {
-            v.setId(Integer.parseInt(viagem.getText()));
             v.setLocalDeOrigem(Integer.parseInt(localOrigem.getText()));
             v.setLocalDeDestino(Integer.parseInt(localDestino.getText()));
             v.setId_Motorista(Integer.parseInt(Motorista.getText()));
-            v.setId_Veiculo(Integer.parseInt(Veiculo.getText()));
+            v.setId_Veiculo(Veiculo.getText());
             v.setId_Evento(Integer.parseInt(Evento.getText()));
         } catch (NumberFormatException e) {
             erro.setText("numero?");
@@ -205,9 +218,35 @@ public class JDialogViagem extends javax.swing.JDialog {
         }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void MotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MotoristaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MotoristaActionPerformed
+    private void escolherOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escolherOrigemActionPerformed
+        JDialogEscolha consulta = new JDialogEscolha(0); // 0 de Enderecos
+        consulta.setVisible(true);
+        localOrigem.setText(consulta.id);
+    }//GEN-LAST:event_escolherOrigemActionPerformed
+
+    private void escolherDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escolherDestinoActionPerformed
+        JDialogEscolha consulta = new JDialogEscolha(0); // 0 de Enderecos
+        consulta.setVisible(true);
+        localDestino.setText(consulta.id);
+    }//GEN-LAST:event_escolherDestinoActionPerformed
+
+    private void escolherMotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escolherMotoristaActionPerformed
+        JDialogEscolha consulta = new JDialogEscolha(2); // 2 de Motorista
+        consulta.setVisible(true);
+        Motorista.setText(consulta.id);
+    }//GEN-LAST:event_escolherMotoristaActionPerformed
+
+    private void escolherVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escolherVeiculoActionPerformed
+        JDialogEscolha consulta = new JDialogEscolha(4); // 4 de Veiculo
+        consulta.setVisible(true);
+        Veiculo.setText(consulta.id);
+    }//GEN-LAST:event_escolherVeiculoActionPerformed
+
+    private void escolherEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escolherEventoActionPerformed
+        JDialogEscolha consulta = new JDialogEscolha(1); // 1 de Evento
+        consulta.setVisible(true);
+        Evento.setText(consulta.id);
+    }//GEN-LAST:event_escolherEventoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,8 +254,12 @@ public class JDialogViagem extends javax.swing.JDialog {
     private javax.swing.JTextField Motorista;
     private javax.swing.JTextField Veiculo;
     private javax.swing.JLabel erro;
+    private javax.swing.JButton escolherDestino;
+    private javax.swing.JButton escolherEvento;
+    private javax.swing.JButton escolherMotorista;
+    private javax.swing.JButton escolherOrigem;
+    private javax.swing.JButton escolherVeiculo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -225,6 +268,5 @@ public class JDialogViagem extends javax.swing.JDialog {
     private javax.swing.JTextField localDestino;
     private javax.swing.JTextField localOrigem;
     private javax.swing.JLabel mensagem;
-    private javax.swing.JTextField viagem;
     // End of variables declaration//GEN-END:variables
 }

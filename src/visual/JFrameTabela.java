@@ -137,37 +137,10 @@ public class JFrameTabela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SelecaoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecaoTabelaActionPerformed
-        ResultSet rs = null;
-        switch (SelecaoTabela.getSelectedIndex()) {
-            case 0:
-                DaoEnderecos den = new DaoEnderecos();
-                rs = den.getResultSet();
-                break;
-            case 1:
-                DaoEventos dev = new DaoEventos();
-                rs = dev.getResultSet();
-                break;
-            case 2:
-                DaoMotoristas dm = new DaoMotoristas();
-                rs = dm.getResultSet();
-                break;
-            case 3:
-                DaoPassageiros dp = new DaoPassageiros();
-                rs = dp.getResultSet();
-                break;                
-            case 4:
-                DaoVeiculos dv = new DaoVeiculos();
-                rs = dv.getResultSet();
-                break;
-            case 5:
-                DaoViagens dvi = new DaoViagens();
-                rs = dvi.getResultSet();
-                break;
-        }
-        DefaultTableModel model = TableHelper.modelFromRS(rs);
-        tabela.setModel(model);
+        updateTabela();
         
-        
+        /*
+        // Uma funcionalidade que ia ser utilizada pro update, mas infelizmente achei outra solução </3
         // Criar um listener para ver quando uma celula é mudada
         model.addTableModelListener(new TableModelListener() {
             public void tableChanged(TableModelEvent e) {
@@ -180,6 +153,7 @@ public class JFrameTabela extends javax.swing.JFrame {
                 }
             }
         });
+        */
     }//GEN-LAST:event_SelecaoTabelaActionPerformed
 
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
@@ -253,36 +227,25 @@ public class JFrameTabela extends javax.swing.JFrame {
                 case 0:
                     DaoEnderecos den = new DaoEnderecos();
                     den.removeByID(Integer.parseInt(id));
-                    rs = den.getResultSet();
                     break;
                 case 1:
                     dev.removeByID(Integer.parseInt(id));
-                    rs = dev.getResultSet();
                     break;
                 case 2:
                     dm.removeByID(Integer.parseInt(id));
-                    rs = dm.getResultSet();
                     break;
                 case 3:
                     dp.removeByID(Integer.parseInt(id));
-                    rs = dp.getResultSet();
                     break;                
                 case 4:
                     dv.removeByID(id);
-                    rs = dv.getResultSet();
                     break;
                 case 5:
                     dvi.removeByID(Integer.parseInt(id));
-                    rs = dvi.getResultSet();
-                    break;
-                default:
-                    DaoViagens dvi2 = new DaoViagens();
-                    dvi2.removeByID(Integer.parseInt(id));
-                    rs = dvi2.getResultSet();
                     break;
                 }
-                tabela.setModel(TableHelper.modelFromRS(rs));
             }
+            updateTabela();
         }
     }//GEN-LAST:event_removerActionPerformed
 
@@ -411,7 +374,39 @@ public class JFrameTabela extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private void updateTabela() {
+        ResultSet rs = null;
+        switch (SelecaoTabela.getSelectedIndex()) {
+            case 0:
+                DaoEnderecos den = new DaoEnderecos();
+                rs = den.getResultSet();
+                break;
+            case 1:
+                DaoEventos dev = new DaoEventos();
+                rs = dev.getResultSet();
+                break;
+            case 2:
+                DaoMotoristas dm = new DaoMotoristas();
+                rs = dm.getResultSet();
+                break;
+            case 3:
+                DaoPassageiros dp = new DaoPassageiros();
+                rs = dp.getResultSet();
+                break;                
+            case 4:
+                DaoVeiculos dv = new DaoVeiculos();
+                rs = dv.getResultSet();
+                break;
+            case 5:
+                DaoViagens dvi = new DaoViagens();
+                rs = dvi.getResultSet();
+                break;
+        }
+        DefaultTableModel model = TableHelper.modelFromRS(rs);
+        tabela.setModel(model);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> SelecaoTabela;
     private javax.swing.JButton alterar;

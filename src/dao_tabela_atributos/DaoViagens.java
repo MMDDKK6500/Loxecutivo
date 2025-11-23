@@ -20,7 +20,7 @@ public class DaoViagens extends DaoBase {
             stmt.setInt(1, viagem.getLocalDeOrigem());
             stmt.setInt(2, viagem.getLocalDeDestino());
             stmt.setInt(3, viagem.getId_Motorista());
-            stmt.setInt(4, viagem.getId_Veiculo());
+            stmt.setString(4, viagem.getId_Veiculo());
             stmt.setInt(5, viagem.getId_Evento());
             stmt.execute();
             stmt.close();
@@ -42,7 +42,7 @@ public class DaoViagens extends DaoBase {
             viagem.setLocalDeOrigem(rs_TabelaViagens.getInt("local_de_origem"));
             viagem.setLocalDeDestino(rs_TabelaViagens.getInt("local_de_destino"));
             viagem.setId_Motorista(rs_TabelaViagens.getInt("id_motorista"));
-            viagem.setId_Veiculo(rs_TabelaViagens.getInt("id_veiculo"));
+            viagem.setId_Veiculo(rs_TabelaViagens.getString("id_veiculo"));
             viagem.setId_Evento(rs_TabelaViagens.getInt("id_evento"));
             return viagem;
 

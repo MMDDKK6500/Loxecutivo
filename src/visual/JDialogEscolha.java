@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import tabela_atributos.*;
 import util.TableHelper;
 
-public class JDialogConsulta extends javax.swing.JDialog {
+public class JDialogEscolha extends javax.swing.JDialog {
 
     public String id = "";
     private int entidadeIndex;
@@ -19,7 +19,8 @@ public class JDialogConsulta extends javax.swing.JDialog {
     /**
      * Creates new form JFrameTabela
      */
-    public JDialogConsulta(int entidade) {
+    public JDialogEscolha(int entidade) {
+        setModal(true);
         initComponents();
         this.entidadeIndex = entidade;
         
@@ -71,6 +72,7 @@ public class JDialogConsulta extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        escolher = new javax.swing.JButton();
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,13 +88,25 @@ public class JDialogConsulta extends javax.swing.JDialog {
         tabela.setToolTipText("");
         jScrollPane1.setViewportView(tabela);
 
+        escolher.setText("Escolher Dado Selecionado");
+        escolher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escolherActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(389, 389, 389)
+                        .addComponent(escolher)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,14 +114,30 @@ public class JDialogConsulta extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(escolher)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void escolherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escolherActionPerformed
+        this.id = "";
+        
+        if (tabela.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Nenhum dado selecionado", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        this.id = String.valueOf(tabela.getModel().getValueAt(tabela.getSelectedRow(), this.idIndex - 1));
+            
+        dispose();
+    }//GEN-LAST:event_escolherActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton escolher;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables

@@ -171,7 +171,7 @@ public class JDialogEvento extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JDialogConsulta consulta = new JDialogConsulta(0); // 0 de Enderecos
+        JDialogEscolha consulta = new JDialogEscolha(0); // 0 de Enderecos
         consulta.setVisible(true);
         endereco.setText(String.valueOf(consulta.id));
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -5,7 +5,7 @@ public class Viagem {
     public int local_de_origem;
     public int local_de_destino;
     public int id_motorista;
-    public int id_veiculo;
+    public String id_veiculo;
     public int id_evento;
     
     public int getId() {
@@ -44,11 +44,11 @@ public class Viagem {
     }
     
     
-    public int getId_Veiculo() {
+    public String getId_Veiculo() {
         return id_veiculo;
     }
     
-    public void setId_Veiculo(int id_veiculo) {
+    public void setId_Veiculo(String id_veiculo) {
         this.id_veiculo = id_veiculo;
     }
     
