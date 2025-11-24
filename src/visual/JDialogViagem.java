@@ -1,21 +1,34 @@
 package visual;
 
-import dao_tabela_atributos.DaoVeiculos;
 import dao_tabela_atributos.DaoViagens;
-import java.awt.event.WindowEvent;
-import tabela_atributos.Veiculo;
 import java.sql.SQLException;
 import javax.swing.Timer;
 import tabela_atributos.Viagem;
 
 public class JDialogViagem extends javax.swing.JDialog {
 
+    private boolean isAlter = false;
+    private int alterId;  
+    
     /**
      * Creates new form JFrameTeste
      */
     public JDialogViagem() {
         setModal(true);
         initComponents();
+    }
+    
+    public JDialogViagem(boolean isAlter, Viagem v) {
+        setModal(true);
+        initComponents();
+        if (isAlter) {
+            this.isAlter = true;
+            localOrigem.setText(String.valueOf(v.getLocalDeOrigem()));
+            localDestino.setText(String.valueOf(v.getLocalDeDestino()));
+            Motorista.setText(String.valueOf(v.getId_Motorista()));
+            Veiculo.setText(v.getId_Veiculo());
+            Evento.setText(String.valueOf(v.getId_Evento()));
+        }
     }
 
     /**
@@ -192,6 +205,7 @@ public class JDialogViagem extends javax.swing.JDialog {
             v.setId_Motorista(Integer.parseInt(Motorista.getText()));
             v.setId_Veiculo(Veiculo.getText());
             v.setId_Evento(Integer.parseInt(Evento.getText()));
+            v.setId(alterId);
         } catch (NumberFormatException e) {
             erro.setText("numero?");
             return;
@@ -201,7 +215,12 @@ public class JDialogViagem extends javax.swing.JDialog {
 
         try {
             mensagem.setText("Inserindo no banco...");
-            dao.InserirDados(v);
+            if (isAlter) {
+                dao.alterarDados(v);
+            } else {
+                dao.InserirDados(v);
+            }
+            
             mensagem.setText("Viagem cadastrada com sucesso!");
             erro.setText("");
 

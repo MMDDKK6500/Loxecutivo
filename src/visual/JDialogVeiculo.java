@@ -8,12 +8,27 @@ import javax.swing.Timer;
 
 public class JDialogVeiculo extends javax.swing.JDialog {
 
+    private boolean isAlter = false;
+    private int alterId;   
+    
     /**
      * Creates new form JFrameTeste
      */
     public JDialogVeiculo() {
         setModal(true);
         initComponents();
+    }
+    
+    public JDialogVeiculo(boolean isAlter, Veiculo v) {
+        setModal(true);
+        initComponents();
+        if(isAlter) {
+            this.isAlter = true;
+            cor.setText(v.getCor());
+            placa.setText(v.getId_Placa());
+            marca.setText(v.getMarca());
+            modelo.setText(v.getModelo());
+        }
     }
 
     /**
@@ -149,7 +164,12 @@ public class JDialogVeiculo extends javax.swing.JDialog {
         DaoVeiculos dv = new DaoVeiculos();
         try {
             mensagem.setText("Inserindo no banco de dados...");
-            dv.InserirDados(veiculo);
+            if (isAlter) {
+                dv.alterarDados(veiculo);
+            } else {
+                dv.InserirDados(veiculo);
+            }
+            
             mensagem.setText("Veículo inserido no banco de dados!");
             jButton1.setEnabled(false);
             erro.setText("");
@@ -162,7 +182,6 @@ public class JDialogVeiculo extends javax.swing.JDialog {
         } catch(SQLException e) {
             mensagem.setText("Falha ao inserir dados no banco! Consultar desenvolvedor com esta mensagem de erro:");
             erro.setText(e.getMessage());
-            return;
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

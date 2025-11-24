@@ -4,8 +4,6 @@ import dao_tabela_atributos.*;
 import java.sql.ResultSet;
 import java.util.Arrays;
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import tabela_atributos.*;
 import util.TableHelper;
@@ -162,26 +160,37 @@ public class JFrameTabela extends javax.swing.JFrame {
         DaoMotoristas dm = new DaoMotoristas();
         DaoVeiculos dv = new DaoVeiculos();
         DaoPassageiros dp = new DaoPassageiros();
-        DaoEnderecos de = new DaoEnderecos();
+        DaoEnderecos den = new DaoEnderecos();
         
         String[] ids = new String[tabela.getSelectedRowCount()];
         int indexids = 0;
         
         // O(n²) - duas for nested
         for (int y : tabela.getSelectedRows()) {
-            for (int x = 0; x < tabela.getColumnCount(); x++) {
-                //System.out.println("x: " + x + " y: " + y + " " + tabela.getColumnName(x));
-                if (tabela.getColumnName(x).startsWith("id_")) {
-                    String into;
-                    try {
-                        into = (String)tabela.getModel().getValueAt(y, x);
-                    } catch (ClassCastException ex) {
-                        into = String.valueOf(tabela.getModel().getValueAt(y, x));
-                    }
-                    ids[indexids] = into;
-                    indexids++;
-                }
+            int x = 0;
+            switch (SelecaoTabela.getSelectedIndex()) {
+                case 0:
+                    x = den.idIndex;
+                    break;
+                case 1:
+                    x = dev.idIndex;
+                    break;
+                case 2:
+                    x = dm.idIndex;;
+                    break;
+                case 3:
+                    x = dp.idIndex;
+                    break;                
+                case 4:
+                    x = dv.idIndex;
+                    break;
+                case 5:
+                    x = dvi.idIndex;
+                    break;
             }
+            String into = String.valueOf(tabela.getModel().getValueAt(y, x - 1));
+            ids[indexids] = into;
+            indexids++;
         }
         
         if (ids.length == 0) {
@@ -193,7 +202,7 @@ public class JFrameTabela extends javax.swing.JFrame {
             switch (SelecaoTabela.getSelectedIndex()) {
                 case 0:
                     //Endereços
-                    de.checkDependencias(ids);
+                    den.checkDependencias(ids);
                     break;
                 case 1:
                     //Eventos
@@ -225,7 +234,6 @@ public class JFrameTabela extends javax.swing.JFrame {
             for (String id : ids) {
             switch (SelecaoTabela.getSelectedIndex()) {
                 case 0:
-                    DaoEnderecos den = new DaoEnderecos();
                     den.removeByID(Integer.parseInt(id));
                     break;
                 case 1:
@@ -271,29 +279,29 @@ public class JFrameTabela extends javax.swing.JFrame {
                     DaoMotoristas dm = new DaoMotoristas();
                     int moId = (int)tabela.getModel().getValueAt(i, dm.idIndex - 1);
                     Motorista mo = dm.getMotorista(moId);
-                    //JDialogMotorista motoristas = new JDialogMotorista(true, mo);
-                   // motoristas.setVisible(true);
+                    JDialogMotorista motoristas = new JDialogMotorista(true, mo);
+                    motoristas.setVisible(true);
                     break;
                 case 3:
                     DaoPassageiros dap = new DaoPassageiros();
                     int paId = (int)tabela.getModel().getValueAt(i, dap.idIndex - 1);
                     Passageiro pa = dap.getPassageiro(paId);
-                    //JDialogPassageiro passageiro = new JDialogPassageiro(true, pa);
-                    //passageiro.setVisible(true);
+                    JDialogPassageiro passageiro = new JDialogPassageiro(true, pa);
+                    passageiro.setVisible(true);
                     break;                
                 case 4:
                     DaoVeiculos dav = new DaoVeiculos();
                     String veId = String.valueOf(tabela.getModel().getValueAt(i, dav.idIndex - 1));
-                    //Veiculo ve = dav.getVeiculo(veId);
-                    //JDialogVeiculo veiculo = new JDialogVeiculo(true, ve);
-                    //veiculo.setVisible(true);
+                    Veiculo ve = dav.getVeiculo(veId);
+                    JDialogVeiculo veiculo = new JDialogVeiculo(true, ve);
+                    veiculo.setVisible(true);
                     break;
                 case 5:
                     DaoViagens dvi = new DaoViagens();
                     int viId = (int)tabela.getModel().getValueAt(i, dvi.idIndex - 1);
                     Viagem vi = dvi.getViagem(viId);
-                    //JDialogViagem viagem = new JDialogViagem(true, vi);
-                    //viagem.setVisible(true);
+                    JDialogViagem viagem = new JDialogViagem(true, vi);
+                    viagem.setVisible(true);
                     break;
                 default:
                     JOptionPane.showMessageDialog(this, "Nenhuma tabela selecionada", "Erro", JOptionPane.WARNING_MESSAGE);

@@ -29,8 +29,27 @@ public class DaoViagens extends DaoBase {
         }
     }
     
+    //Not Working
+    public void alterarDados(Viagem viagem) throws SQLException {
+        String sql = "UPDATE viagens SET local_de_origem = ?, local_de_destino = ?, id_motorista = ?, id_veiculo = ?, id_evento = ? WHERE id_viagem = ?";
+        try {
+            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            stmt.setInt(1, viagem.getLocalDeOrigem());
+            stmt.setInt(2, viagem.getLocalDeDestino());
+            stmt.setInt(3, viagem.getId_Motorista());
+            stmt.setString(4, viagem.getId_Veiculo());
+            stmt.setInt(5, viagem.getId_Evento());
+            stmt.setInt(6, viagem.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao inserir dados no BD_MySQL" + e.getMessage());
+            throw e;
+        }
+    }
+    
     public Viagem getViagem(int id) {
-        String sql = "SELECT * FROM viagens WHERE id = ?";
+        String sql = "SELECT * FROM viagens WHERE id_viagem = ?";
 
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);

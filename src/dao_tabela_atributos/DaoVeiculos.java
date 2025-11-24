@@ -29,8 +29,26 @@ public class DaoVeiculos extends DaoBase {
             throw e;
         }
     }
+
+    public void alterarDados(Veiculo veiculo) throws SQLException {
+        String sql = "UPDATE veiculos SET id_placa = ?, modelo = ?, ano = ?, marca = ?, cor = ? WHERE id_placa = ?)";
+        try {
+            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            stmt.setString(1, veiculo.getId_Placa());
+            stmt.setString(2, veiculo.getModelo());
+            stmt.setInt(3, veiculo.getAno());
+            stmt.setString(4, veiculo.getMarca());
+            stmt.setString(5, veiculo.getCor());
+            stmt.setString(6, veiculo.getId_Placa());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao inserir dados no BD_MySQL" + e.getMessage());
+            throw e;
+        }
+    }
     
-    public Veiculo getVeiculo(String id) throws SQLException {
+    public Veiculo getVeiculo(String id) {
         String sql = "SELECT * FROM veiculos WHERE id_placa = ?";
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -46,7 +64,7 @@ public class DaoVeiculos extends DaoBase {
             return veiculo;
         } catch (SQLException e) {
             System.out.println("Id não encontrado" + e.getMessage());
-            throw e;
+            return null;
         }
     }
     

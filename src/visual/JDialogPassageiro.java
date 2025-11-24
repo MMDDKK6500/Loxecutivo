@@ -7,12 +7,29 @@ import tabela_atributos.Passageiro;
 
 public class JDialogPassageiro extends javax.swing.JDialog {
 
+    private boolean isAlter = false;
+    private int alterId;   
+    
     /**
      * Creates new form JFrameTeste
      */
     public JDialogPassageiro() {
         setModal(true);
         initComponents();
+    }
+    
+    public JDialogPassageiro(boolean isAlter, Passageiro p) {
+        setModal(true);
+        initComponents();
+        if (isAlter) {
+            nome.setText(p.getNome());
+            sobrenome.setText(p.getSobrenome());
+            rg.setText(p.getRG());
+            cpf.setText(p.getCPF());
+            numero.setText(p.getNumero());
+            empresa.setText(p.getEmpresa());  
+            alterId = p.getId();
+        }
     }
 
     /**
@@ -178,7 +195,8 @@ public class JDialogPassageiro extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Passageiro p = new Passageiro();
-
+        
+        p.setId(alterId);
         p.setNome(nome.getText());
         p.setSobrenome(sobrenome.getText());
         p.setNumero(numero.getText());
@@ -190,7 +208,12 @@ public class JDialogPassageiro extends javax.swing.JDialog {
         DaoPassageiros dp = new DaoPassageiros();
         try {
             mensagem.setText("Inserindo no banco de dados...");
-            dp.InserirDados(p);
+            if (isAlter) {
+                dp.alterarDados(p);
+            } else {
+                dp.InserirDados(p);
+            }
+            
             mensagem.setText("Passageiro inserido no banco de dados!");
             jButton1.setEnabled(false);
             erro.setText("");

@@ -12,12 +12,28 @@ import tabela_atributos.Passageiro;
 
 public class JDialogMotorista extends javax.swing.JDialog {
 
+    private boolean isAlter = false;
+    private int alterId;    
+    
     /**
      * Creates new form JFrameTeste
      */
     public JDialogMotorista() {
         setModal(true);
         initComponents();
+    }
+    
+    public JDialogMotorista(boolean isAlter, Motorista mo) {
+        setModal(true);
+        initComponents();
+        if (isAlter) {
+            this.isAlter = true;
+            alterId = mo.getId_Motorista();
+            nome.setText(mo.getNome());
+            sobrenome.setText(mo.getSobrenome());
+            rg.setText(mo.getRG());
+            cpf.setText(mo.getCPF());
+        }
     }
 
     /**
@@ -145,7 +161,8 @@ public class JDialogMotorista extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
         Motorista m = new Motorista();
-
+        
+        m.setId_Motorista(alterId);
         m.setNome(nome.getText());
         m.setSobrenome(sobrenome.getText());
         m.setRG(rg.getText());
@@ -154,7 +171,11 @@ public class JDialogMotorista extends javax.swing.JDialog {
         DaoMotoristas dm = new DaoMotoristas();
         try {
             mensagem.setText("Inserindo no banco de dados...");
-            dm.InserirDados(m);
+            if (isAlter) {
+                dm.alterarDados(m);
+            } else {
+                dm.InserirDados(m);
+            }
             mensagem.setText("Motorista inserido no banco de dados!");
             jButton1.setEnabled(false);
             erro.setText("");

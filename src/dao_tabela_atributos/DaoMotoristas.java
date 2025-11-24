@@ -13,19 +13,31 @@ public class DaoMotoristas extends DaoBase  {
         this.idIndex = 5;
     }
     
-    public void InserirDados(Motorista motorista)throws SQLException {
-        String sql = "INSERT INTO motoristas (nome, sobrenome, rg, cpf) VALUES (?, ?, ?, ?)";
+    public void InserirDados(Motorista evento)throws SQLException {
+        String sql = "INSERT INTO eventos (nome, sobrenome, rg, cpf) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);
-            stmt.setString(1, motorista.getNome());
-            stmt.setString(2, motorista.getSobrenome());
-            stmt.setString(3, motorista.getRG());
-            stmt.setString(4, motorista.getCPF());
+            stmt.setString(1, evento.getNome());
+            stmt.setString(2, evento.getSobrenome());
+            stmt.setString(3, evento.getRG());
+            stmt.setString(4, evento.getCPF());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados no BD_MySQL" + e.getMessage());
         }
+    }
+
+    public void alterarDados(Motorista motorista) throws SQLException {
+        String sql = "UPDATE motoristas SET nome = ?, sobrenome = ?, rg = ?, cpf = ? WHERE id_motorista = ?";
+        PreparedStatement stmt = this.conectar.prepareStatement(sql);
+        stmt.setString(1, motorista.getNome());
+        stmt.setString(2, motorista.getSobrenome());
+        stmt.setString(3, motorista.getRG());
+        stmt.setString(4, motorista.getCPF());
+        stmt.setInt(5, motorista.getId_Motorista());
+        stmt.execute();
+        stmt.close();
     }
     
     public Motorista getMotorista(int id) {
@@ -34,14 +46,14 @@ public class DaoMotoristas extends DaoBase  {
             PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            Motorista motorista = new Motorista();
+            Motorista evento = new Motorista();
             rs.first();
-            motorista.setId_Motorista(id);
-            motorista.setNome(rs.getString("nome"));
-            motorista.setSobrenome(rs.getString("sobrenome"));
-            motorista.setRG(rs.getString("rg"));
-            motorista.setCPF(rs.getString("cpf"));
-            return motorista;
+            evento.setId_Motorista(id);
+            evento.setNome(rs.getString("nome"));
+            evento.setSobrenome(rs.getString("sobrenome"));
+            evento.setRG(rs.getString("rg"));
+            evento.setCPF(rs.getString("cpf"));
+            return evento;
         } catch (SQLException e) {
             System.out.println("Id não encontrado" + e.getMessage());
             return null;
