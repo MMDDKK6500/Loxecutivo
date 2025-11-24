@@ -4,6 +4,7 @@ import tabela_atributos.Evento;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 public class DaoEventos extends DaoBase {
 
@@ -52,5 +53,38 @@ public class DaoEventos extends DaoBase {
             System.out.println("Id não encontrado" + e.getMessage());
             return null;
         }
+    }
+    
+    public boolean checkDependencias(String[] ids) throws Exception {
+        
+        String mensagem = "";
+        String viagens = "Conflito com viagens de id:";
+        
+        DaoViagens dvi = new DaoViagens();
+        ResultSet dviRS = dvi.getResultSet();
+        int[] dviFK = {6};
+        
+        try {
+            while (dviRS.next()) {
+                for (int i = 0; i < dviFK.length; i++) {
+                    for (int j = 0; j < ids.length; j++) {
+                        if (ids[j].equals(String.valueOf(dviRS.getInt(dviFK[i])))) {
+                            System.out.println("Conflito com viagens de id: " + dviRS.getInt(dvi.idIndex));
+                            viagens += ", " + String.valueOf(dviRS.getInt(dvi.idIndex));
+                        }
+                    }
+                } 
+            }
+        } catch (SQLException ex) {
+                System.out.println("Erro: " + ex);
+        }
+        
+        mensagem = viagens;
+        if (mensagem.equals("Conflito com viagens de id:")) return false;
+        
+        JOptionPane.showMessageDialog(null, "Os dados que você quer apagar estão vinculados a outros dados no banco de dados,\npor favor remova esse dados em conflito antes de remover o atual:\n" + mensagem, "Conflito", JOptionPane.ERROR_MESSAGE);
+        
+        return true;
+        
     }
 }

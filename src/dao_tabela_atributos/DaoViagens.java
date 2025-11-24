@@ -3,6 +3,7 @@ package dao_tabela_atributos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import tabela_atributos.Viagem;
 
 public class DaoViagens extends DaoBase {
@@ -29,8 +30,7 @@ public class DaoViagens extends DaoBase {
         }
     }
     
-    //Not Working
-    public void alterarDados(Viagem viagem) throws SQLException {
+    public void alterarDados(Viagem viagem) {
         String sql = "UPDATE viagens SET local_de_origem = ?, local_de_destino = ?, id_motorista = ?, id_veiculo = ?, id_evento = ? WHERE id_viagem = ?";
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);
@@ -44,7 +44,6 @@ public class DaoViagens extends DaoBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados no BD_MySQL" + e.getMessage());
-            throw e;
         }
     }
     
@@ -69,5 +68,38 @@ public class DaoViagens extends DaoBase {
             System.out.println("Id não encontrado" + e.getMessage());
             return null;
         }
+    }
+    
+    public boolean checkDependencias(String[] ids) throws Exception {
+        
+        String mensagem = "";
+        String viagens = "Conflito com passageiros de id:";
+        
+        DaoPassageiros dp = new DaoPassageiros();
+        ResultSet dpRS = dp.getResultSet();
+        int[] dpFK = {8};
+        
+        try {
+            while (dpRS.next()) {
+                for (int i = 0; i < dpFK.length; i++) {
+                    for (int j = 0; j < ids.length; j++) {
+                        if (ids[j].equals(String.valueOf(dpRS.getInt(dpFK[i])))) {
+                            System.out.println("Conflito com viagens de id: " + dpRS.getInt(dp.idIndex));
+                            viagens += ", " + String.valueOf(dpRS.getInt(dp.idIndex));
+                        }
+                    }
+                } 
+            }
+        } catch (SQLException ex) {
+                System.out.println("Erro: " + ex);
+        }
+                
+        mensagem = viagens;
+        if (mensagem.equals("Conflito com passageiros de id:")) return false;
+        
+        JOptionPane.showMessageDialog(null, "Os dados que você quer apagar estão vinculados a outros dados no banco de dados,\npor favor remova esse dados em conflito antes de remover o atual:\n" + mensagem, "Conflito", JOptionPane.ERROR_MESSAGE);
+        
+        return true;
+        
     }
 }

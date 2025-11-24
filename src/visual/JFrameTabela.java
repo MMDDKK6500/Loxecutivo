@@ -202,25 +202,26 @@ public class JFrameTabela extends javax.swing.JFrame {
             switch (SelecaoTabela.getSelectedIndex()) {
                 case 0:
                     //Endereços
-                    den.checkDependencias(ids);
+                    if (den.checkDependencias(ids)) return;
                     break;
                 case 1:
                     //Eventos
+                    if (dev.checkDependencias(ids)) return;
                     break;
                 case 2:
                     //Motoristas
+                    if (dm.checkDependencias(ids)) return;
                     break;
-               case 3:
-                   //Passageiros
-                     break;                
+                case 3:
+                    //Passageiros
+                    break;                
                 case 4:
                     //Veiculos
+                    if (dv.checkDependencias(ids)) return;
                     break;
                 case 5:
                     //Viagens
-                    break;
-                default:
-                    DaoViagens dvi2 = new DaoViagens();
+                    if (dvi.checkDependencias(ids)) return;
                     break;
             }
         } catch (Exception ex) {

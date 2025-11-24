@@ -59,7 +59,8 @@ public class DaoBase {
             return false;
         }
     }
-    
+
+    /*
     public ArrayList<Integer> checkDependency(String[] ids) throws Exception {
         
         ArrayList<String> _out = new ArrayList<>();
@@ -106,4 +107,5 @@ public class DaoBase {
         
         return out;
     }
+    */
 }

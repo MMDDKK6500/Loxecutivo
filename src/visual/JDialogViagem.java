@@ -23,6 +23,7 @@ public class JDialogViagem extends javax.swing.JDialog {
         initComponents();
         if (isAlter) {
             this.isAlter = true;
+            alterId = v.id_viagem;
             localOrigem.setText(String.valueOf(v.getLocalDeOrigem()));
             localDestino.setText(String.valueOf(v.getLocalDeDestino()));
             Motorista.setText(String.valueOf(v.getId_Motorista()));
