@@ -47,7 +47,7 @@ public class DaoPassageiros extends DaoBase {
     }
     
     public Passageiro getPassageiro(int id) {
-        String sql = "SELECT * FROM passageiros WHERE id = ?";
+        String sql = "SELECT * FROM passageiros WHERE id_passageiro = ?";
 
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
