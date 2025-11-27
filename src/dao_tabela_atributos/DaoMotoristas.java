@@ -6,16 +6,16 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
-public class DaoMotoristas extends DaoBase  {
-
+public class DaoMotoristas extends DaoBase {
+    
     public DaoMotoristas() {
         this.tabela = "motoristas";
         this.id = "id_motorista";
         this.idIndex = 5;
     }
     
-    public void InserirDados(Motorista evento)throws SQLException {
-        String sql = "INSERT INTO eventos (nome, sobrenome, rg, cpf) VALUES (?, ?, ?, ?)";
+    public void InserirDados(Motorista evento) throws SQLException {
+        String sql = "INSERT INTO motoristas (nome, sobrenome, rg, cpf) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);
             stmt.setString(1, evento.getNome());
@@ -26,19 +26,24 @@ public class DaoMotoristas extends DaoBase  {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados no BD_MySQL" + e.getMessage());
+            throw e;
         }
     }
 
     public void alterarDados(Motorista motorista) throws SQLException {
         String sql = "UPDATE motoristas SET nome = ?, sobrenome = ?, rg = ?, cpf = ? WHERE id_motorista = ?";
-        PreparedStatement stmt = this.conectar.prepareStatement(sql);
-        stmt.setString(1, motorista.getNome());
-        stmt.setString(2, motorista.getSobrenome());
-        stmt.setString(3, motorista.getRG());
-        stmt.setString(4, motorista.getCPF());
-        stmt.setInt(5, motorista.getId_Motorista());
-        stmt.execute();
-        stmt.close();
+        try {
+            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            stmt.setString(1, motorista.getNome());
+            stmt.setString(2, motorista.getSobrenome());
+            stmt.setString(3, motorista.getRG());
+            stmt.setString(4, motorista.getCPF());
+            stmt.setInt(5, motorista.getId_Motorista());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw e;
+        }
     }
     
     public Motorista getMotorista(int id) {
@@ -75,8 +80,10 @@ public class DaoMotoristas extends DaoBase  {
                 for (int i = 0; i < dviFK.length; i++) {
                     for (int j = 0; j < ids.length; j++) {
                         if (ids[j].equals(String.valueOf(dviRS.getInt(dviFK[i])))) {
-                            System.out.println("Conflito com viagens de id: " + dviRS.getInt(dvi.idIndex));
-                            viagens += ", " + String.valueOf(dviRS.getInt(dvi.idIndex));
+                            if (viagens.equals("Conflito com viagens de id:")) {
+                                viagens += " " + String.valueOf(dviRS.getInt(dvi.idIndex));
+                            } else
+                                viagens += ", " + String.valueOf(dviRS.getInt(dvi.idIndex));
                         }
                     }
                 } 

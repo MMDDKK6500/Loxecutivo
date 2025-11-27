@@ -203,7 +203,13 @@ public class JDialogPassageiro extends javax.swing.JDialog {
         p.setEmpresa(empresa.getText());
         p.setRG(rg.getText());
         p.setCPF(cpf.getText());
-        p.setId_Viagem(Integer.parseInt(viagem.getText()));
+        try {
+            p.setId_Viagem(Integer.parseInt(viagem.getText()));
+        } catch(NumberFormatException ex) {
+            mensagem.setText("Erro ao inserir no banco!");
+            erro.setText("O número inserido não é um número válido!");
+            return;
+        }
 
         DaoPassageiros dp = new DaoPassageiros();
         try {

@@ -1,20 +1,42 @@
 package visual;
 
 import dao_tabela_atributos.DaoEnderecos;
-import dao_tabela_atributos.DaoMotoristas;
-import dao_tabela_atributos.DaoPassageiros;
-import dao_tabela_atributos.DaoVeiculos;
-import dao_tabela_atributos.DaoViagens;
-import java.awt.event.WindowEvent;
-import tabela_atributos.Veiculo;
 import java.sql.SQLException;
 import javax.swing.Timer;
 import tabela_atributos.Endereco;
-import tabela_atributos.Motorista;
-import tabela_atributos.Passageiro;
-import tabela_atributos.Viagem;
 
 public class JDialogEndereco extends javax.swing.JDialog {
+    
+    String[] UFs = {
+        "AC",
+        "AL",
+        "AP",
+        "AM",
+        "BA",
+        "CE",
+        "DF",
+        "ES",
+        "GO",
+        "MA",
+        "MS",
+        "MT",
+        "MG",
+        "PA",
+        "PB",
+        "PR",
+        "PE",
+        "PI",
+        "RJ",
+        "RN",
+        "RS",
+        "RO",
+        "RR",
+        "SC",
+        "SP",
+        "SE",
+        "TO",
+    };
+    
     
     private boolean isAlter = false;
     private int alterId;
@@ -37,7 +59,7 @@ public class JDialogEndereco extends javax.swing.JDialog {
             numero.setText(String.valueOf(e.getNumero()));
             bairro.setText(e.getBairro());
             cidade.setText(e.getCidade());
-            uf.setText(e.getUf());
+            uf.setSelectedItem(e.getUf());
         }
     }
 
@@ -59,10 +81,10 @@ public class JDialogEndereco extends javax.swing.JDialog {
         RG1 = new javax.swing.JLabel();
         mensagem = new javax.swing.JLabel();
         erro = new javax.swing.JLabel();
-        uf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cidade = new javax.swing.JTextField();
+        uf = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -91,14 +113,12 @@ public class JDialogEndereco extends javax.swing.JDialog {
 
         jLabel7.setText("uf");
 
+        uf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MS", "MT", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(erro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -121,14 +141,19 @@ public class JDialogEndereco extends javax.swing.JDialog {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(0, 18, Short.MAX_VALUE))
-            .addComponent(mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(287, 287, 287))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(erro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mensagem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +174,7 @@ public class JDialogEndereco extends javax.swing.JDialog {
                     .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(12, 12, 12)
+                .addGap(17, 17, 17)
                 .addComponent(mensagem)
                 .addGap(2, 2, 2)
                 .addComponent(erro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,10 +189,16 @@ public class JDialogEndereco extends javax.swing.JDialog {
         Endereco e = new Endereco();
         e.setId_Endereco(alterId);
         e.setRua(rua.getText());
-        e.setNumero(Integer.parseInt(numero.getText()));
+        try {
+            e.setNumero(Integer.parseInt(numero.getText()));
+        } catch(NumberFormatException ex) {
+            mensagem.setText("Erro ao inserir no banco!");
+            erro.setText("O número inserido não é um número válido!");
+            return;
+        }
         e.setBairro(bairro.getText());
         e.setCidade(cidade.getText());
-        e.setUf(uf.getText());
+        e.setUf(String.valueOf(uf.getSelectedItem()));
 
         DaoEnderecos de = new DaoEnderecos();
 
@@ -208,6 +239,6 @@ public class JDialogEndereco extends javax.swing.JDialog {
     private javax.swing.JLabel mensagem;
     private javax.swing.JTextField numero;
     private javax.swing.JTextField rua;
-    private javax.swing.JTextField uf;
+    private javax.swing.JComboBox<String> uf;
     // End of variables declaration//GEN-END:variables
 }

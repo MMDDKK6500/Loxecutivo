@@ -29,21 +29,26 @@ public class DaoPassageiros extends DaoBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados no BD_MySQL" + e.getMessage());
+            throw e;
         }
     }
     
     public void alterarDados(Passageiro passageiro) throws SQLException {
-        String sql = "UPDATE Passageiros SET nome = ?, sobrenome = ?, rg = ?, cpf = ?, numero = ?, empresa = ? WHERE id_passageiro = ?";
-        PreparedStatement stmt = this.conectar.prepareStatement(sql);
-        stmt.setString(1, passageiro.getNome());
-        stmt.setString(2, passageiro.getSobrenome());
-        stmt.setString(3, passageiro.getRG());
-        stmt.setString(4, passageiro.getCPF());
-        stmt.setString(5, passageiro.getNumero());
-        stmt.setString(6, passageiro.getEmpresa());
-        stmt.setInt(7, passageiro.getId());
-        stmt.execute();
-        stmt.close();
+        String sql = "UPDATE passageiros SET nome = ?, sobrenome = ?, rg = ?, cpf = ?, numero = ?, empresa = ? WHERE id_passageiro = ?";
+        try {
+            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            stmt.setString(1, passageiro.getNome());
+            stmt.setString(2, passageiro.getSobrenome());
+            stmt.setString(3, passageiro.getRG());
+            stmt.setString(4, passageiro.getCPF());
+            stmt.setString(5, passageiro.getNumero());
+            stmt.setString(6, passageiro.getEmpresa());
+            stmt.setInt(7, passageiro.getId());
+            stmt.execute();
+            stmt.close();
+        } catch(SQLException e) {
+            throw e;
+        }
     }
     
     public Passageiro getPassageiro(int id) {

@@ -10,6 +10,8 @@ import util.TableHelper;
 
 public class JFrameTabela extends javax.swing.JFrame {
 
+    boolean isAddingItems = false;
+    
     /**
      * Creates new form JFrameTabela
      */
@@ -136,6 +138,8 @@ public class JFrameTabela extends javax.swing.JFrame {
 
     private void SelecaoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecaoTabelaActionPerformed
         updateTabela();
+        
+        updateConsultas();
         
         /*
         // Uma funcionalidade que ia ser utilizada pro update, mas infelizmente achei outra solução </3
@@ -268,7 +272,6 @@ public class JFrameTabela extends javax.swing.JFrame {
                     JDialogEndereco endereco = new JDialogEndereco(true, e);
                     endereco.setVisible(true);
                     break;
-
                 case 1:
                     DaoEventos dev = new DaoEventos();
                     int devId = (int)tabela.getModel().getValueAt(i, dev.idIndex - 1);
@@ -309,10 +312,10 @@ public class JFrameTabela extends javax.swing.JFrame {
                     break;
             }
         }
+        updateTabela();
     }//GEN-LAST:event_alterarActionPerformed
 
     private void inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirActionPerformed
-        // TODO Criar tela de Inserção de dados, criar uma para cada tabela.
         switch (SelecaoTabela.getSelectedIndex()) {
             case 0:
                 JDialogEndereco endereco = new JDialogEndereco();
@@ -342,11 +345,59 @@ public class JFrameTabela extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Nenhuma tabela selecionada", "Erro", JOptionPane.WARNING_MESSAGE);
                 break;
         }
+        updateTabela();
     }//GEN-LAST:event_inserirActionPerformed
 
     private void consultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaActionPerformed
-        // TODO Colocar consulta de foreign keys dependendo da tabela e linha selecionada
-        // usar consulta.getSelectedItem()
+        if (isAddingItems) return;
+        switch (SelecaoTabela.getSelectedIndex()) {
+            case 1:
+                switch (consulta.getSelectedIndex()) {
+                    case 0:
+                        JDialogConsulta consultaDialog = new JDialogConsulta(0);
+                        consultaDialog.setVisible(true);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 3:
+                switch (consulta.getSelectedIndex()) {
+                    case 0:
+                        JDialogConsulta consultaDialog = new JDialogConsulta(5);
+                        consultaDialog.setVisible(true);
+                        break;
+                    default:
+                        break;
+                }
+                break;                
+            case 5:
+                switch (consulta.getSelectedIndex()) {
+                    case 0:
+                        JDialogConsulta endDialog = new JDialogConsulta(0);
+                        endDialog.setVisible(true);
+                        break;
+                    case 1:
+                        JDialogConsulta endDialog2 = new JDialogConsulta(0);
+                        endDialog2.setVisible(true);
+                        break;
+                    case 2:
+                        JDialogConsulta motDialog = new JDialogConsulta(2);
+                        motDialog.setVisible(true);
+                        break;
+                    case 3:
+                        JDialogConsulta veicDialog = new JDialogConsulta(4);
+                        veicDialog.setVisible(true);
+                        break;
+                    case 4:
+                        JDialogConsulta evDialog = new JDialogConsulta(1);
+                        evDialog.setVisible(true);
+                        break;                        
+                    default:
+                        break;
+                }
+                break;
+        }
     }//GEN-LAST:event_consultaActionPerformed
 
         /**
@@ -414,6 +465,27 @@ public class JFrameTabela extends javax.swing.JFrame {
         }
         DefaultTableModel model = TableHelper.modelFromRS(rs);
         tabela.setModel(model);
+    }
+
+    private void updateConsultas() {
+        this.isAddingItems = true;
+        consulta.removeAllItems();
+        switch (SelecaoTabela.getSelectedIndex()) {
+            case 1:
+                consulta.addItem("Endereços");
+                break;
+            case 3:
+                consulta.addItem("Viagens");
+                break;                
+            case 5:
+                consulta.addItem("Local de Origem");
+                consulta.addItem("Local de Destino");
+                consulta.addItem("Motoristas");
+                consulta.addItem("Veiculos");
+                consulta.addItem("Eventos");
+                break;
+        }
+        this.isAddingItems = false; 
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

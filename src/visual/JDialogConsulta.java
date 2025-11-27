@@ -2,10 +2,6 @@ package visual;
 
 import dao_tabela_atributos.*;
 import java.sql.ResultSet;
-import java.util.Arrays;
-import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import tabela_atributos.*;
 import util.TableHelper;

@@ -2,12 +2,8 @@ package visual;
 
 import dao_tabela_atributos.*;
 import java.sql.ResultSet;
-import java.util.Arrays;
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import tabela_atributos.*;
 import util.TableHelper;
 
 public class JDialogEscolha extends javax.swing.JDialog {
@@ -73,6 +69,7 @@ public class JDialogEscolha extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         escolher = new javax.swing.JButton();
+        inserir = new javax.swing.JButton();
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,19 +92,27 @@ public class JDialogEscolha extends javax.swing.JDialog {
             }
         });
 
+        inserir.setText("Inserir Dados");
+        inserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inserirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(389, 389, 389)
-                        .addComponent(escolher)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(inserir, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(escolher)
+                .addGap(297, 297, 297))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +120,9 @@ public class JDialogEscolha extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(escolher)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(escolher)
+                    .addComponent(inserir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -135,9 +142,39 @@ public class JDialogEscolha extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_escolherActionPerformed
 
+    private void inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirActionPerformed
+        switch (this.entidadeIndex) {
+            case 0:
+                JDialogEndereco endereco = new JDialogEndereco();
+                endereco.setVisible(true);
+                break;
+            case 1:
+                JDialogEvento evento = new JDialogEvento();
+                evento.setVisible(true);
+                break;
+            case 2:
+                JDialogMotorista motoristas = new JDialogMotorista();
+                motoristas.setVisible(true);
+                break;
+            case 3:
+                JDialogPassageiro passageiro = new JDialogPassageiro();
+                passageiro.setVisible(true);
+                break;                
+            case 4:
+                JDialogVeiculo veiculo = new JDialogVeiculo();
+                veiculo.setVisible(true);
+                break;
+            case 5:
+                JDialogViagem viagem = new JDialogViagem();
+                viagem.setVisible(true);
+                break;
+        }
+    }//GEN-LAST:event_inserirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton escolher;
+    private javax.swing.JButton inserir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables

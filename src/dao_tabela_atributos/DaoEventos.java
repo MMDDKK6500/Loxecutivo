@@ -24,17 +24,22 @@ public class DaoEventos extends DaoBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados no BD_MySQL" + e.getMessage());
+            throw e;
         }
     }
 
     public void alterarDados(Evento evento) throws SQLException {
         String sql = "UPDATE eventos SET nome = ?, id_endereco = ? WHERE id_evento = ?";
-        PreparedStatement stmt = this.conectar.prepareStatement(sql);
-        stmt.setString(1, evento.getNome());
-        stmt.setInt(2, evento.getId_Endereco());
-        stmt.setInt(3, evento.getId_Evento());
-        stmt.execute();
-        stmt.close();
+        try {
+            PreparedStatement stmt = this.conectar.prepareStatement(sql);
+            stmt.setString(1, evento.getNome());
+            stmt.setInt(2, evento.getId_Endereco());
+            stmt.setInt(3, evento.getId_Evento());
+            stmt.execute();
+            stmt.close();
+        } catch(SQLException e) {
+            throw e;
+        }
     }
     
     public Evento getEvento(int id) {
@@ -69,8 +74,10 @@ public class DaoEventos extends DaoBase {
                 for (int i = 0; i < dviFK.length; i++) {
                     for (int j = 0; j < ids.length; j++) {
                         if (ids[j].equals(String.valueOf(dviRS.getInt(dviFK[i])))) {
-                            System.out.println("Conflito com viagens de id: " + dviRS.getInt(dvi.idIndex));
-                            viagens += ", " + String.valueOf(dviRS.getInt(dvi.idIndex));
+                            if (viagens.equals("Conflito com viagens de id:")) {
+                                viagens += " " + String.valueOf(dviRS.getInt(dvi.idIndex));
+                            } else
+                                viagens += ", " + String.valueOf(dviRS.getInt(dvi.idIndex));
                         }
                     }
                 } 

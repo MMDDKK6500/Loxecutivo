@@ -96,8 +96,10 @@ public class DaoVeiculos extends DaoBase {
                 for (int i = 0; i < dviFK.length; i++) {
                     for (int j = 0; j < ids.length; j++) {
                         if (ids[j].equals(String.valueOf(dviRS.getString(dviFK[i])))) {
-                            System.out.println("Conflito com viagens de id: " + dviRS.getString(dvi.idIndex));
-                            viagens += ", " + String.valueOf(dviRS.getString(dvi.idIndex));
+                            if (viagens.equals("Conflito com viagens de id:")) {
+                                viagens += " " + String.valueOf(dviRS.getInt(dvi.idIndex));
+                            } else 
+                                viagens += ", " + String.valueOf(dviRS.getString(dvi.idIndex));
                         }
                     }
                 } 

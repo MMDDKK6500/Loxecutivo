@@ -15,7 +15,7 @@ public class DaoEnderecos extends DaoBase {
         this.idIndex = 6;
     }
     
-    public void InserirDados(Endereco endereco) throws SQLException{
+    public void InserirDados(Endereco endereco) throws SQLException {
         String sql = "INSERT INTO enderecos (rua, numero, bairro, cidade, uf) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = this.conectar.prepareStatement(sql);
@@ -28,6 +28,7 @@ public class DaoEnderecos extends DaoBase {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erro ao inserir dados no BD_MySQL" + e.getMessage());
+            throw e;
         }
     }
     
@@ -81,8 +82,10 @@ public class DaoEnderecos extends DaoBase {
                 for (int i = 0; i < dviFK.length; i++) {
                     for (int j = 0; j < ids.length; j++) {
                         if (ids[j].equals(String.valueOf(dviRS.getInt(dviFK[i])))) {
-                            System.out.println("Conflito com viagens de id: " + dviRS.getInt(dvi.idIndex));
-                            viagens += ", " + String.valueOf(dviRS.getInt(dvi.idIndex));
+                            if (viagens.equals("Conflito com viagens de id:")) {
+                                viagens += " " + String.valueOf(dviRS.getInt(dvi.idIndex));
+                            } else
+                                viagens += ", " + String.valueOf(dviRS.getInt(dvi.idIndex));
                         }
                     }
                 } 
@@ -100,8 +103,10 @@ public class DaoEnderecos extends DaoBase {
                 for (int i = 0; i < dveFK.length; i++) {
                     for (int j = 0; j < ids.length; j++) {
                         if (ids[j].equals(String.valueOf(dveRS.getInt(dveFK[i])))) {
-                            System.out.println("Conflito com eventos de id: " + dveRS.getInt(dve.idIndex));
-                            eventos += ", " + String.valueOf(dveRS.getInt(dve.idIndex));
+                            if (eventos.equals("Conflito com eventos de id:")) {
+                                eventos += " " + String.valueOf(dveRS.getInt(dve.idIndex));
+                            } else
+                                eventos += ", " + String.valueOf(dveRS.getInt(dve.idIndex));
                         }
                     }
                 } 
@@ -110,12 +115,17 @@ public class DaoEnderecos extends DaoBase {
                 System.out.println("Erro: " + ex);
         }
         
-        mensagem = viagens + "\n" + eventos;
-        if (mensagem.equals("Conflito com viagens de id:" + "\n" + "Conflito com eventos de id:")) return false;
+        if (viagens.equals("Conflito com viagens de id:") && eventos.equals("Conflito com eventos de id:")) {
+           return false;
+        }  else if (viagens.equals("Conflito com viagens de id:")) {
+            mensagem = eventos;
+        } else if (eventos.equals("Conflito com eventos de id:")) {
+            mensagem = viagens;
+        } else {
+            mensagem = viagens + "\n" + eventos;
+        }
         
         JOptionPane.showMessageDialog(null, "Os dados que você quer apagar estão vinculados a outros dados no banco de dados,\npor favor remova esse dados em conflito antes de remover o atual:\n" + mensagem, "Conflito", JOptionPane.ERROR_MESSAGE);
-        
         return true;
-        
     }
 }
