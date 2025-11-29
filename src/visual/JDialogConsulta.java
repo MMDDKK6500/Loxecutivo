@@ -68,6 +68,8 @@ public class JDialogConsulta extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
+        setTitle("Consulta");
+
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},

@@ -61,6 +61,7 @@ public class JDialogViagem extends javax.swing.JDialog {
         escolherEvento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Viagens");
 
         jButton1.setText("Inserir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

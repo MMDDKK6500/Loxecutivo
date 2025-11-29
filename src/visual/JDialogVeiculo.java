@@ -55,6 +55,7 @@ public class JDialogVeiculo extends javax.swing.JDialog {
         erro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Veiculos");
 
         jButton1.setText("Inserir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

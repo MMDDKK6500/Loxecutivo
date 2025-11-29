@@ -71,6 +71,8 @@ public class JDialogEscolha extends javax.swing.JDialog {
         escolher = new javax.swing.JButton();
         inserir = new javax.swing.JButton();
 
+        setTitle("Escolher");
+
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
