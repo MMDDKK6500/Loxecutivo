@@ -102,7 +102,7 @@ public class JFrameTabela extends javax.swing.JFrame {
 
         jLabel2.setText("Tabela Selecionada:");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\OneDrive SENACSP\\OneDrive - SENAC - SP\\Documentos\\NetBeansProjects\\Loxecutivo\\images\\logo.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("/home/mmddkk/Loxecutivo/images/logo.png")); // NOI18N
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("\nDesenvolvido para a Paxtour Mobilidade Corporativa");
@@ -130,14 +130,13 @@ public class JFrameTabela extends javax.swing.JFrame {
                         .addComponent(consulta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(192, 192, 192)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SelecaoTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -174,8 +173,11 @@ public class JFrameTabela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SelecaoTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecaoTabelaActionPerformed
+        
+        // Dar refresh na tabela, pra pegar o conteudo mais recente do banco
         updateTabela();
         
+        // Verificar se a tabela atual precisa de alguma consulta
         updateConsultas();
         
         /*
@@ -194,7 +196,9 @@ public class JFrameTabela extends javax.swing.JFrame {
         });
         */
     }//GEN-LAST:event_SelecaoTabelaActionPerformed
-
+    
+    
+    //Botão de remover dados
     private void removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerActionPerformed
         if (tabela.getSelectedRows().length == 0) {
             JOptionPane.showMessageDialog(this, "Nenhum dado selecionado", "Erro", JOptionPane.WARNING_MESSAGE);
@@ -210,7 +214,7 @@ public class JFrameTabela extends javax.swing.JFrame {
         String[] ids = new String[tabela.getSelectedRowCount()];
         int indexids = 0;
         
-        // O(n²) - duas for nested
+        // O(n)
         for (int y : tabela.getSelectedRows()) {
             int x = 0;
             switch (SelecaoTabela.getSelectedIndex()) {
@@ -238,11 +242,13 @@ public class JFrameTabela extends javax.swing.JFrame {
             indexids++;
         }
         
+        // Verificar se algum dado foi escolhido
         if (ids.length == 0) {
             JOptionPane.showMessageDialog(this, "Nenhum dado selecionado", "Erro", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
+        //Verificar se ids são dependentes em alguma outra tabela
         try {
             switch (SelecaoTabela.getSelectedIndex()) {
                 case 0:
